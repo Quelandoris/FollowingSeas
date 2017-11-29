@@ -9,6 +9,7 @@ public class MultiBuoy : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        GetComponent<BoxCollider>().enabled = false;
         int quality = Constants.buoyancyQuality;
 
         float cellHeight = transform.localScale.y / quality;

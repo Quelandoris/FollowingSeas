@@ -39,7 +39,7 @@ public class Current : MonoBehaviour {
         {
             affectedObjects = new List<Rigidbody>();
         }
-        Rigidbody otherBody = other.GetComponent<Rigidbody>();
+        Rigidbody otherBody = other.GetComponentInParent<Rigidbody>();
         if (otherBody != null)
         {
             affectedObjects.Add(otherBody);
@@ -48,7 +48,7 @@ public class Current : MonoBehaviour {
 
     private void OnTriggerExit(Collider other)
     {
-        Rigidbody otherBody = other.GetComponent<Rigidbody>();
+        Rigidbody otherBody = other.GetComponentInParent<Rigidbody>();
         if (otherBody != null)
         {
             if (affectedObjects.Contains(otherBody))

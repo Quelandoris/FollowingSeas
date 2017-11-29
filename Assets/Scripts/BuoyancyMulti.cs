@@ -21,7 +21,7 @@ public class BuoyancyMulti : MonoBehaviour {
             float depth = surface.point.y - keel.y; //Calculate the distance between the lowest point of the object and the water surface
             depth = Mathf.Max(0, depth); //Don't allow negative depth values
             float submergedVolume = Mathf.Min(depth, height) * crossSection; //Approximate the volume of the submerged area. Min is to cap it out at the object's entire volume
-            myRB.AddForceAtPosition(submergedVolume * /*surface.normal*/Vector3.up, transform.position); //Apply the buoyant force
+            myRB.AddForceAtPosition(submergedVolume * surface.normal/*Vector3.up*/, transform.position); //Apply the buoyant force
 
             //This is where it gets tricky. I tried several approaches before coming up with this one.
             //Part 2: Orientation Correction

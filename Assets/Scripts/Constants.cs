@@ -1,3 +1,3 @@
 ﻿public class Constants{
-    public static readonly int buoyancyQuality = 2;
+    public static readonly int buoyancyQuality = 3;
 }
