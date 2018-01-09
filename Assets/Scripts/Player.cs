@@ -7,7 +7,7 @@ public class Player : MonoBehaviour {
     Rigidbody myRB;
     public float throttleSpeed = 7;
     public float rotateSpeed = 0.5f;
-    public static float grappleStrength = 8;
+    public static float grappleStrength = /*8*/30;
 
     public LayerMask waterLayer;
     public LayerMask playerLayer;
