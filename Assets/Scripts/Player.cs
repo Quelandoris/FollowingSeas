@@ -2,28 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 [RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour {
     Rigidbody myRB;
     public float throttleSpeed = 7;
     public float rotateSpeed = 0.5f;
     public static float grappleStrength = 8;
+    
 
     public LayerMask waterLayer;
     public LayerMask playerLayer;
     public LayerMask currentLayer;
+    public LayerMask grappleLayer;
+    public LayerMask harpoonLayer;
 
     public Transform grappleGun;
     public GameObject hook;
     public GameObject rope;
     bool launched;
     public bool attached;
-
-    LayerMask grappleLayer;
+    public GameObject GCrossHair;
+    public GameObject CrossHair;
+    
 	// Use this for initialization
 	void Start () {
         myRB = GetComponent<Rigidbody>();
-        grappleLayer = ~(waterLayer | playerLayer | currentLayer);
+        //grappleLayer = ~(waterLayer | playerLayer | currentLayer);  //Makes everything but the water, player, or current layer the grapple layer
 	}
 	
 	// Update is called once per frame
@@ -32,7 +37,7 @@ public class Player : MonoBehaviour {
         if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out mouseHit, 100000, grappleLayer))
         {
             grappleGun.LookAt(mouseHit.point);
-
+            
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 if (launched)
@@ -48,8 +53,11 @@ public class Player : MonoBehaviour {
                 }
             }
         }
+        
 
-        rope.transform.LookAt(hook.transform.position);
+      
+
+            rope.transform.LookAt(hook.transform.position);
         rope.transform.localScale = new Vector3(1, 1, Vector3.Distance(hook.transform.position, rope.transform.position));
 	}
 
