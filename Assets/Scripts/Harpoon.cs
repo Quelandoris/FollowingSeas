@@ -41,10 +41,10 @@ public class Harpoon : MonoBehaviour
 
 
     }
-   /* public void OnCollisionEnter(Collision other)
+   public void OnCollisionEnter(Collision other)
     {
 
-        if (other.gameObject.GetComponent<Rigidbody>() != null && !haveJoint)
+       /* if (other.gameObject.GetComponent<Rigidbody>() != null && !haveJoint)
         {
             FixedJoint joint = gameObject.AddComponent<FixedJoint>();
             joint.connectedBody = other.rigidbody;
@@ -52,10 +52,10 @@ public class Harpoon : MonoBehaviour
             joint.breakTorque = 2000f;
             haveJoint = true;
             rb.useGravity = true;
-        }
+        }*/
         if (other.gameObject.tag == "Harpoon")
         {
-            Debug.Log("hit obj");
+            Destroy(other.gameObject);
         }
-    }*/
+    }
 }
