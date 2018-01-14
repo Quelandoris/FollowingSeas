@@ -7,7 +7,7 @@ public class Harpoon : MonoBehaviour
     Rigidbody rb;
     public float thrust = 500;
     public float timer = 20f;
-    private bool haveJoint = false;
+    //private bool haveJoint = false;
 
 
     void Start()
@@ -31,10 +31,10 @@ public class Harpoon : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        if (other.CompareTag("Grapple"))
+        if (other.CompareTag("Grapple")|| other.CompareTag("Wall")||other.CompareTag("Crate"))
         {
             rb.constraints = RigidbodyConstraints.FreezeAll;
-            rb.isKinematic = true;
+            rb.detectCollisions = false;
             transform.parent = other.transform;
             
         }

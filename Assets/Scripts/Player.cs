@@ -37,6 +37,14 @@ public class Player : MonoBehaviour {
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out mouseHit, 100000, defaultLayer)) { 
             grappleGun.LookAt(mouseHit.point);
         }
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            harpoonLauncher.isShooting = true;
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            harpoonLauncher.isShooting = false;
+        }
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out mouseHit, 100000, grappleLayer))
         {
             if (Input.GetKeyDown(KeyCode.Mouse1))
@@ -70,14 +78,7 @@ public class Player : MonoBehaviour {
         //myRB.AddTorque(Input.GetAxis("Horizontal") * -0.1f * transform.forward, ForceMode.Impulse);
         float thrust = Mathf.Max(0, Input.GetAxis("Vertical"));
         myRB.AddTorque(-0.5f * thrust * transform.right);
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            harpoonLauncher.isShooting = true;
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
-            harpoonLauncher.isShooting = false;
-        }
+        
         if (attached)
         {
             myRB.AddForce(grappleStrength * (hook.transform.position - transform.position).normalized);
