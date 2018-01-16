@@ -2,38 +2,52 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 [RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour {
     Rigidbody myRB;
     public float throttleSpeed = 7;
     public float rotateSpeed = 0.5f;
     public static float grappleStrength = 8;
+    
 
     public LayerMask waterLayer;
     public LayerMask playerLayer;
     public LayerMask currentLayer;
+    public LayerMask grappleLayer;
+    public LayerMask harpoonLayer;
+    public LayerMask defaultLayer;
 
     public Transform grappleGun;
     public GameObject hook;
     public GameObject rope;
     bool launched;
     public bool attached;
+    public HarpoonLauncher harpoonLauncher;
 
-    LayerMask grappleLayer;
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         myRB = GetComponent<Rigidbody>();
-        grappleLayer = ~(waterLayer | playerLayer | currentLayer);
+        //grappleLayer = ~(waterLayer | playerLayer | currentLayer);  //Makes everything but the water, player, or current layer the grapple layer
 	}
-	
-	// Update is called once per frame
-	void Update () {
-        RaycastHit mouseHit;
-        if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out mouseHit, 100000, grappleLayer))
-        {
-            grappleGun.LookAt(mouseHit.point);
 
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+    // Update is called once per frame
+    void Update() {
+        RaycastHit mouseHit;
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out mouseHit, 100000, defaultLayer)) { 
+            grappleGun.LookAt(mouseHit.point);
+        }
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            harpoonLauncher.isShooting = true;
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            harpoonLauncher.isShooting = false;
+        }
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out mouseHit, 100000, grappleLayer))
+        {
+            if (Input.GetKeyDown(KeyCode.Mouse1))
             {
                 if (launched)
                 {
@@ -48,8 +62,11 @@ public class Player : MonoBehaviour {
                 }
             }
         }
+        
 
-        rope.transform.LookAt(hook.transform.position);
+      
+
+            rope.transform.LookAt(hook.transform.position);
         rope.transform.localScale = new Vector3(1, 1, Vector3.Distance(hook.transform.position, rope.transform.position));
 	}
 
@@ -61,7 +78,7 @@ public class Player : MonoBehaviour {
         //myRB.AddTorque(Input.GetAxis("Horizontal") * -0.1f * transform.forward, ForceMode.Impulse);
         float thrust = Mathf.Max(0, Input.GetAxis("Vertical"));
         myRB.AddTorque(-0.5f * thrust * transform.right);
-
+        
         if (attached)
         {
             myRB.AddForce(grappleStrength * (hook.transform.position - transform.position).normalized);
