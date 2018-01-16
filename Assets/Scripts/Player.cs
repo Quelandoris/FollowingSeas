@@ -7,7 +7,7 @@ using UnityEngine;
 public class Player : MonoBehaviour {
     Rigidbody myRB;
     public float throttleSpeed = 7;
-    public float rotateSpeed = 0.5f;
+    public float rotateSpeed = 1.0f;
     public static float grappleStrength = 8;
     
 
@@ -35,7 +35,7 @@ public class Player : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         RaycastHit mouseHit;
-        if (Physics.Raycast(new Ray(Camera.main.transform.position, Camera.main.transform.forward), out mouseHit, 100000, ~(playerLayer))) { 
+        if (Physics.Raycast(new Ray(Camera.main.transform.position, Camera.main.transform.forward), out mouseHit, 100000, ~(playerLayer | currentLayer))) { 
             grappleGun.LookAt(mouseHit.point);
         }
         if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -46,7 +46,7 @@ public class Player : MonoBehaviour {
         {
             harpoonLauncher.isShooting = false;
         }
-        hasGrappleTarget = Physics.Raycast(new Ray(Camera.main.transform.position, Camera.main.transform.forward), out mouseHit, 100000, grappleLayer);
+        hasGrappleTarget = Physics.Raycast(new Ray(Camera.main.transform.position, Camera.main.transform.forward), out mouseHit, 100000, grappleLayer); //Remind me to change this. Will see grapple objects through solid ones.
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             if (launched)
