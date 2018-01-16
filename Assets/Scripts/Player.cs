@@ -23,6 +23,7 @@ public class Player : MonoBehaviour {
     public GameObject rope;
     bool launched;
     public bool attached;
+    bool hasGrappleTarget;
     public HarpoonLauncher harpoonLauncher;
 
     // Use this for initialization
@@ -34,7 +35,7 @@ public class Player : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         RaycastHit mouseHit;
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out mouseHit, 100000, defaultLayer)) { 
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out mouseHit, 100000, ~(playerLayer))) { 
             grappleGun.LookAt(mouseHit.point);
         }
         if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -45,28 +46,26 @@ public class Player : MonoBehaviour {
         {
             harpoonLauncher.isShooting = false;
         }
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out mouseHit, 100000, grappleLayer))
+        hasGrappleTarget = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out mouseHit, 100000, grappleLayer);
+        if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-            if (Input.GetKeyDown(KeyCode.Mouse1))
+            if (launched)
             {
-                if (launched)
-                {
-                    Retract();
-                    launched = false;
-                    attached = false;
-                }
-                else
-                {
-                    Fire();
-                    launched = true;
-                }
+                Retract();
+                launched = false;
+                attached = false;
+            }
+            else if(hasGrappleTarget)
+            {
+                Fire();
+                launched = true;
             }
         }
-        
 
-      
 
-            rope.transform.LookAt(hook.transform.position);
+
+
+        rope.transform.LookAt(hook.transform.position);
         rope.transform.localScale = new Vector3(1, 1, Vector3.Distance(hook.transform.position, rope.transform.position));
 	}
 
