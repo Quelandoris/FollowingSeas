@@ -5,6 +5,7 @@ using UnityEngine;
 public class Grapple : MonoBehaviour {
 
     public Rigidbody player;
+    public Transform rope;
     public Collider hookCollider;
     bool active;
     Rigidbody attachedRB;
@@ -17,7 +18,7 @@ public class Grapple : MonoBehaviour {
         }
         if(attachedRB != null)
         {
-            attachedRB.AddForceAtPosition(Player.grappleStrength * (player.transform.position - transform.position).normalized, transform.position);
+            attachedRB.AddForceAtPosition(Player.grappleStrength * (rope.position - transform.position).normalized, transform.position);
         }
     }
 

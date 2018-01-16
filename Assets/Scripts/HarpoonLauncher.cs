@@ -19,6 +19,7 @@ public class HarpoonLauncher : MonoBehaviour {
             {
                 shotCounter = timeBetweenShots;
                 Instantiate(harpoon, firePoint.position, (firePoint.rotation));
+                gameObject.GetComponentInParent<Rigidbody>().AddForceAtPosition(-1 * transform.up, transform.position, ForceMode.Impulse);
             }
             
         }

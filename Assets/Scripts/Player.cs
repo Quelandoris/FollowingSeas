@@ -17,19 +17,19 @@ public class Player : MonoBehaviour {
     public LayerMask grappleLayer;
     public LayerMask harpoonLayer;
     public LayerMask defaultLayer;
+    LayerMask solidLayers;
 
     public Transform grappleGun;
     public GameObject hook;
     public GameObject rope;
     bool launched;
     public bool attached;
-    bool hasGrappleTarget;
     public HarpoonLauncher harpoonLauncher;
 
     // Use this for initialization
     void Start () {
+        solidLayers = ~(waterLayer | playerLayer | currentLayer);
         myRB = GetComponent<Rigidbody>();
-        //grappleLayer = ~(waterLayer | playerLayer | currentLayer);  //Makes everything but the water, player, or current layer the grapple layer
 	}
 
     // Update is called once per frame
@@ -39,9 +39,16 @@ public class Player : MonoBehaviour {
             Application.Quit();
         }
         RaycastHit mouseHit;
-        if (Physics.Raycast(new Ray(Camera.main.transform.position, Camera.main.transform.forward), out mouseHit, 100000, ~(playerLayer | currentLayer))) { 
-            grappleGun.LookAt(mouseHit.point);
+        Vector3 lookTarget;
+        if(Physics.Raycast(new Ray(Camera.main.transform.position, Camera.main.transform.forward), out mouseHit, 100000, solidLayers))
+        {
+            lookTarget = mouseHit.point;
         }
+        else
+        {
+            lookTarget = 10000 * Camera.main.transform.forward + Camera.main.transform.position;
+        }
+        grappleGun.LookAt(lookTarget);
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             harpoonLauncher.isShooting = true;
@@ -50,14 +57,14 @@ public class Player : MonoBehaviour {
         {
             harpoonLauncher.isShooting = false;
         }
-        hasGrappleTarget = Physics.Raycast(new Ray(Camera.main.transform.position, Camera.main.transform.forward), out mouseHit, 100000, grappleLayer); //Remind me to change this. Will see grapple objects through solid ones.
+        
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             if (launched)
             {
                 Retract();
             }
-            else if(hasGrappleTarget)
+            else
             {
                 Fire();
             }
