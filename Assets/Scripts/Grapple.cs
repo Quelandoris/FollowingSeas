@@ -25,6 +25,11 @@ public class Grapple : MonoBehaviour {
     {
         if (active)
         {
+            if (collision.gameObject.CompareTag("Harpoon"))
+            {
+                player.GetComponent<Player>().Retract();
+                return;
+            }
             Deactivate();
             player.gameObject.GetComponent<Player>().attached = true;
             transform.parent = collision.gameObject.transform;

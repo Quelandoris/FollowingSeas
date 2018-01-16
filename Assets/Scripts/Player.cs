@@ -56,13 +56,10 @@ public class Player : MonoBehaviour {
             if (launched)
             {
                 Retract();
-                launched = false;
-                attached = false;
             }
             else if(hasGrappleTarget)
             {
                 Fire();
-                launched = true;
             }
         }
 
@@ -97,14 +94,17 @@ public class Player : MonoBehaviour {
     {
         hook.transform.parent = null;
         hook.GetComponent<Grapple>().Activate();
+        launched = true;
     }
 
-    void Retract()
+    public void Retract()
     {
         hook.transform.parent = grappleGun;
         hook.transform.localPosition = new Vector3(0, 0, 1.5f);
         hook.transform.localScale = new Vector3(1, 1, 1);
         hook.transform.localRotation = Quaternion.identity;
         hook.GetComponent<Grapple>().Detach();
+        launched = false;
+        attached = false;
     }
 }
