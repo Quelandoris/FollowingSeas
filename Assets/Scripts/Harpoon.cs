@@ -33,6 +33,7 @@ public class Harpoon : MonoBehaviour
         }
         if (other.CompareTag("Grapple")|| other.CompareTag("Wall")||other.CompareTag("Crate"))
         {
+          
             rb.constraints = RigidbodyConstraints.FreezeAll;
             rb.detectCollisions = false;
             transform.parent = other.transform;
