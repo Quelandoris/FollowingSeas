@@ -13,7 +13,7 @@ public class CrossHair : MonoBehaviour
     void Update()
     {
         RaycastHit mouseHit;
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out mouseHit, 100000, grappleLayer))
+        if (Physics.Raycast(new Ray(Camera.main.transform.position, Camera.main.transform.forward), out mouseHit, 100000, grappleLayer))
         {
             GCrossHair.SetActive(true);
             GCrossHair.transform.Rotate((Vector3.forward * -90) * Time.deltaTime);
@@ -23,7 +23,7 @@ public class CrossHair : MonoBehaviour
             GCrossHair.SetActive(false);
         }
 
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out mouseHit, 100000, harpoonLayer))
+        if (Physics.Raycast(new Ray(Camera.main.transform.position, Camera.main.transform.forward), out mouseHit, 100000, harpoonLayer))
         {
             crossHair.GetComponent<Image>().color = Color.red;
             GCrossHair.GetComponent<Image>().color = Color.red;

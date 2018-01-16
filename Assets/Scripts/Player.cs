@@ -35,7 +35,7 @@ public class Player : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         RaycastHit mouseHit;
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out mouseHit, 100000, ~(playerLayer))) { 
+        if (Physics.Raycast(new Ray(Camera.main.transform.position, Camera.main.transform.forward), out mouseHit, 100000, ~(playerLayer))) { 
             grappleGun.LookAt(mouseHit.point);
         }
         if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -46,7 +46,7 @@ public class Player : MonoBehaviour {
         {
             harpoonLauncher.isShooting = false;
         }
-        hasGrappleTarget = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out mouseHit, 100000, grappleLayer);
+        hasGrappleTarget = Physics.Raycast(new Ray(Camera.main.transform.position, Camera.main.transform.forward), out mouseHit, 100000, grappleLayer);
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             if (launched)
