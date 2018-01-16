@@ -34,6 +34,10 @@ public class Player : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
         RaycastHit mouseHit;
         if (Physics.Raycast(new Ray(Camera.main.transform.position, Camera.main.transform.forward), out mouseHit, 100000, ~(playerLayer | currentLayer))) { 
             grappleGun.LookAt(mouseHit.point);
