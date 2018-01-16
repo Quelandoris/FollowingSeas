@@ -40,7 +40,7 @@ public class Current : MonoBehaviour {
             affectedObjects = new List<Rigidbody>();
         }
         Rigidbody otherBody = other.GetComponentInParent<Rigidbody>();
-        if (otherBody != null)
+        if (otherBody != null || !other.gameObject.CompareTag("Harpoon"))
         {
             affectedObjects.Add(otherBody);
         }
