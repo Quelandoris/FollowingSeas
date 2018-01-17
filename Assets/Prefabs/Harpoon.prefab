@@ -25,7 +25,8 @@ GameObject:
   - component: {fileID: 54576344644689804}
   - component: {fileID: 136580413383221358}
   - component: {fileID: 136995069024902956}
-  m_Layer: 0
+  - component: {fileID: 114498742717402856}
+  m_Layer: 8
   m_Name: Harpoon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,6 +100,18 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 2
+--- !u!114 &114498742717402856
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1477209547746214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbdef71d01c9d8a4ba651fa274bf0fad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: 20
 --- !u!114 &114812920125523088
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -111,7 +124,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thrust: 5000
-  timer: 5
 --- !u!136 &136580413383221358
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -6,7 +6,6 @@ public class Harpoon : MonoBehaviour
 {
     Rigidbody rb;
     public float thrust = 500;
-    public float timer = 20f;
     //private bool haveJoint = false;
 
 
@@ -15,48 +14,45 @@ public class Harpoon : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.AddForce(transform.forward * thrust);
     }
-    private void Update()
-    {
-        timer -= Time.deltaTime;
-        if (timer <= 0)
-        {
-            Destroy(gameObject);
-        }
-
-    }
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Harpoon"))
-        {
-            Destroy(gameObject);
-        }
-        if (other.CompareTag("Grapple")|| other.CompareTag("Wall")||other.CompareTag("Crate"))
-        {
-          
-            rb.constraints = RigidbodyConstraints.FreezeAll;
-            rb.detectCollisions = false;
-            transform.parent = other.transform;
-            
-        }
 
+        HarpoonHit(other.gameObject);
 
     }
    public void OnCollisionEnter(Collision other)
     {
 
-       /* if (other.gameObject.GetComponent<Rigidbody>() != null && !haveJoint)
+        /* if (other.gameObject.GetComponent<Rigidbody>() != null && !haveJoint)
+         {
+             FixedJoint joint = gameObject.AddComponent<FixedJoint>();
+             joint.connectedBody = other.rigidbody;
+             joint.breakForce = 2000f;
+             joint.breakTorque = 2000f;
+             haveJoint = true;
+             rb.useGravity = true;
+         }*/
+        HarpoonHit(other.gameObject);
+    }
+
+    void HarpoonHit(GameObject hit)
+    {
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+        rb.detectCollisions = false;
+        transform.parent = hit.transform;
+
+        if (hit.CompareTag("Harpoon"))
         {
-            FixedJoint joint = gameObject.AddComponent<FixedJoint>();
-            joint.connectedBody = other.rigidbody;
-            joint.breakForce = 2000f;
-            joint.breakTorque = 2000f;
-            haveJoint = true;
-            rb.useGravity = true;
-        }*/
-        if (other.gameObject.tag == "Harpoon")
-        {
-            Destroy(other.gameObject);
+            try
+            {
+                hit.GetComponentInParent<IHarpoonable>().OnHarpoon();
+            }
+            catch
+            {
+                Debug.Log(hit);
+                Debug.Log("Object does not have a harpoonable script but is tagged as harpoonable");
+            }
         }
     }
 }

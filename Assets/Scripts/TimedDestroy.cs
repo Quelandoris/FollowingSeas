@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimedDestroy : MonoBehaviour
-{ //Destroys the Attached gameobject after a delay set via the inspector
-    public float lifespan;
-    void Start()
+public class TimedDestroy : MonoBehaviour {
+    public float timer = 20f;
+
+    private void Update()
     {
-        Destroy(this.gameObject, lifespan);
+        timer -= Time.deltaTime;
+        if (timer <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }
