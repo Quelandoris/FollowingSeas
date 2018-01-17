@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaterLevel : MonoBehaviour, IToggleable {
+public class WaterLevel : Toggleable {
 
 	// Use this for initialization
 	void Start () {
@@ -14,17 +14,17 @@ public class WaterLevel : MonoBehaviour, IToggleable {
 		
 	}
 
-    public void Positive()
+    public override void Positive()
     {
         //Raise water
     }
 
-    public void Negative()
+    public override void Negative()
     {
         //lower water
     }
 
-    public void Toggle()
+    public override void Toggle()
     {
         //raise or lower water depending on current state
     }

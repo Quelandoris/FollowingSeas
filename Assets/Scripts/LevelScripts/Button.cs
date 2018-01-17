@@ -6,21 +6,22 @@ public enum Actions { TOGGLE, POSITIVE, NEGATIVE}
 
 public class Button : MonoBehaviour, IHarpoonable {
 
-    public IToggleable objectToAffect;
+    public Toggleable objectToAffect;
     public Actions actionType;
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     public void OnHarpoon()
     {
-        //activate button
+        switch (actionType)
+        {
+            case Actions.TOGGLE:
+                objectToAffect.Toggle();
+                break;
+            case Actions.POSITIVE:
+                objectToAffect.Positive();
+                break;
+            case Actions.NEGATIVE:
+                objectToAffect.Negative();
+                break;
+        }
     }
 }
