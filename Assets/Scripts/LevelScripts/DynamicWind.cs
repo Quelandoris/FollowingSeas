@@ -6,8 +6,8 @@ using UnityEngine;
 public class DynamicWind : Toggleable
 {
 
-    List<WindEffect> affectedObjects;
-    List<WindEffect> toRemove = new List<WindEffect>();
+    List<TrackWind> affectedObjects;
+    List<TrackWind> toRemove = new List<TrackWind>();
     public GameObject primaryArrow;
     public GameObject secondaryArrow;
     public float primaryForce;
@@ -35,11 +35,11 @@ public class DynamicWind : Toggleable
     {
         if (affectedObjects == null)
         {
-            affectedObjects = new List<WindEffect>();
+            affectedObjects = new List<TrackWind>();
         }
         if (affectedObjects.Count > 0)
         {
-            foreach (WindEffect windObject in affectedObjects)
+            foreach (TrackWind windObject in affectedObjects)
             {
                 try
                 {
@@ -67,9 +67,9 @@ public class DynamicWind : Toggleable
     {
         if (affectedObjects == null)
         {
-            affectedObjects = new List<WindEffect>();
+            affectedObjects = new List<TrackWind>();
         }
-        WindEffect windObject = other.GetComponentInParent<WindEffect>();
+        TrackWind windObject = other.GetComponentInParent<TrackWind>();
         if (windObject != null)
         {
             affectedObjects.Add(windObject);
@@ -79,7 +79,7 @@ public class DynamicWind : Toggleable
 
     private void OnTriggerExit(Collider other)
     {
-        WindEffect windObject = other.GetComponentInParent<WindEffect>();
+        TrackWind windObject = other.GetComponentInParent<TrackWind>();
         if (windObject != null)
         {
             windObject.LeaveWind(transform, wind);

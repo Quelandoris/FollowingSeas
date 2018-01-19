@@ -19,7 +19,7 @@ public class ConstantWind : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        WindEffect windObject = other.GetComponentInParent<WindEffect>();
+        TrackWind windObject = other.GetComponentInParent<TrackWind>();
         if (windObject != null)
         {
             windObject.EnterWind(transform, wind);
@@ -28,7 +28,7 @@ public class ConstantWind : MonoBehaviour {
 
     private void OnTriggerExit(Collider other)
     {
-        WindEffect windObject = other.GetComponentInParent<WindEffect>();
+        TrackWind windObject = other.GetComponentInParent<TrackWind>();
         if (windObject != null)
         {
             windObject.LeaveWind(transform, wind);

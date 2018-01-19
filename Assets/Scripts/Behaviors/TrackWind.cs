@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WindEffect : MonoBehaviour {
+public class TrackWind : MonoBehaviour {
     Transform trigger;
     Vector3 wind;
 
     public void EnterWind(Transform trigger, Vector3 wind)
     {
         this.trigger = trigger;
-        this.wind = wind;
+        this.wind = MakeHorizontal(wind);
     }
 
     public void LeaveWind(Transform trigger, Vector3 wind)
@@ -26,4 +26,9 @@ public class WindEffect : MonoBehaviour {
         return wind;
     }
 
+    public static Vector3 MakeHorizontal(Vector3 before)
+    {
+        float force = before.magnitude;
+        return force * (new Vector3(before.x, 0, before.z).normalized);
+    }
 }
