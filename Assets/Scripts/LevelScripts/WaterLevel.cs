@@ -14,12 +14,12 @@ public class WaterLevel : Toggleable {
 		
 	}
 
-    public override void Positive()
+    public override void Primary()
     {
         //Raise water
     }
 
-    public override void Negative()
+    public override void Secondary()
     {
         //lower water
     }

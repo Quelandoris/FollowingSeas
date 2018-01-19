@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MovingObject : Toggleable {
-    public Vector3 negativePosition;
-    public Vector3 positivePosition;
+    public Vector3 primaryPosition;
+    public Vector3 secondaryPosition;
     float remainingTime = 0;
     public float duration;
 
@@ -17,44 +17,44 @@ public class MovingObject : Toggleable {
             remainingTime = 0;
         }
 
-        if (positive)
+        if (primary)
         {
-            transform.localPosition = Vector3.Lerp(positivePosition, negativePosition, remainingTime/duration);
+            transform.localPosition = Vector3.Lerp(secondaryPosition, primaryPosition, remainingTime/duration);
         }
         else
         {
-            transform.localPosition = Vector3.Lerp(negativePosition, positivePosition, remainingTime / duration);
+            transform.localPosition = Vector3.Lerp(primaryPosition, secondaryPosition, remainingTime / duration);
         }
         
     }
 
-    public override void Positive()
+    public override void Primary()
     {
-        if (!positive)
+        if (!primary)
         {
-            positive = true;
+            primary = true;
             remainingTime = duration - remainingTime;
         }
     }
 
-    public override void Negative()
+    public override void Secondary()
     {
-        if (positive)
+        if (primary)
         {
-            positive = false;
+            primary = false;
             remainingTime = duration - remainingTime;
         }
     }
 
     public override void Toggle()
     {
-        if (positive)
+        if (primary)
         {
-            Negative();
+            Secondary();
         }
         else
         {
-            Positive();
+            Primary();
         }
     }
 }
