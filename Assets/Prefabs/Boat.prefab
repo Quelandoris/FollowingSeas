@@ -167,6 +167,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4743251168778680}
+  - component: {fileID: 114081871377089772}
+  - component: {fileID: 114640518975144302}
   m_Layer: 8
   m_Name: Mast
   m_TagString: Untagged
@@ -343,7 +345,7 @@ GameObject:
   - component: {fileID: 114093044428523816}
   m_Layer: 0
   m_Name: Boat
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1191,6 +1193,17 @@ MonoBehaviour:
   player: {fileID: 54532132841941852}
   rope: {fileID: 4352169783335240}
   hookCollider: {fileID: 64663903448044462}
+--- !u!114 &114081871377089772
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1411652480256236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbb579afa4f264941a5b49ea89757403, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114093044428523816
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1233,6 +1246,17 @@ MonoBehaviour:
     m_Bits: 16
   height: 1
   crossSection: 12
+--- !u!114 &114640518975144302
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1411652480256236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afc234b94de744a4080148e21b353dc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114869296980293308
 MonoBehaviour:
   m_ObjectHideFlags: 1

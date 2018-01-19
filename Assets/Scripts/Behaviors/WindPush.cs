@@ -6,14 +6,23 @@ using UnityEngine;
 public class WindPush : MonoBehaviour {
     TrackWind windScript;
     Rigidbody myRB;
+    static float windMult = 0.15f;
 
 	void Start () {
-        windScript = GetComponent<TrackWind>();
+        windScript = GetComponentInParent<TrackWind>();
         myRB = GetComponentInParent<Rigidbody>();
 	}
 	
     private void FixedUpdate()
     {
-        myRB.AddForce(windScript.GetWind());
+        Vector3 flatWind = TrackWind.MakeHorizontal(windScript.GetWind());
+        if(windScript.GetWind().y > flatWind.y)
+        {
+            myRB.AddForce(windMult * windScript.GetWind());
+        }
+        else
+        {
+            myRB.AddForce(windMult * flatWind);
+        }
     }
 }

@@ -11,11 +11,7 @@ public class MovingObject : Toggleable {
 
     private void FixedUpdate()
     {
-        remainingTime -= Time.fixedDeltaTime;
-        if(remainingTime < 0)
-        {
-            remainingTime = 0;
-        }
+        remainingTime = Mathf.Max(remainingTime - Time.fixedDeltaTime, 0);
 
         if (primary)
         {
@@ -48,13 +44,6 @@ public class MovingObject : Toggleable {
 
     public override void Toggle()
     {
-        if (primary)
-        {
-            Secondary();
-        }
-        else
-        {
-            Primary();
-        }
+        BasicToggle();
     }
 }

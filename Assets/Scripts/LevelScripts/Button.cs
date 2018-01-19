@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Actions { TOGGLE, PRIMARY, SECONDARY}
+
 
 public class Button : MonoBehaviour, IHarpoonable {
 

@@ -26,6 +26,6 @@ public class WaterLevel : Toggleable {
 
     public override void Toggle()
     {
-        //raise or lower water depending on current state
+        BasicToggle();
     }
 }

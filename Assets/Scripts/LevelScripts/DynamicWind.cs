@@ -112,13 +112,6 @@ public class DynamicWind : Toggleable
 
     public override void Toggle()
     {
-        if (primary)
-        {
-            Secondary();
-        }
-        else
-        {
-            Primary();
-        }
+        BasicToggle();
     }
 }
