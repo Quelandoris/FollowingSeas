@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Splitter : Toggleable {
 
-    Toggleable[] objectsToAffect;
+    public Toggleable[] objectsToAffect;
 
     public override void Primary()
     {

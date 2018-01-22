@@ -15,11 +15,11 @@ public class MovingObject : Toggleable {
 
         if (primary)
         {
-            transform.localPosition = Vector3.Lerp(secondaryPosition, primaryPosition, remainingTime/duration);
+            transform.localPosition = Vector3.Lerp(primaryPosition, secondaryPosition, remainingTime / duration);
         }
         else
         {
-            transform.localPosition = Vector3.Lerp(primaryPosition, secondaryPosition, remainingTime / duration);
+            transform.localPosition = Vector3.Lerp(secondaryPosition, primaryPosition, remainingTime / duration);
         }
         
     }
