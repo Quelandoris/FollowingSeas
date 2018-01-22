@@ -2,12 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Actions { TOGGLE, PRIMARY, SECONDARY }
+
 public abstract class Toggleable : MonoBehaviour {
-    protected bool positive;
+    protected bool primary = true;
 
     public abstract void Toggle();
 
-    public abstract void Positive();
+    public abstract void Primary();
 
-    public abstract void Negative();
+    public abstract void Secondary();
+
+    protected void BasicToggle()
+    {
+        if (primary)
+        {
+            Secondary();
+        }
+        else
+        {
+            Primary();
+        }
+    }
 }

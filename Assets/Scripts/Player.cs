@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody), typeof(TrackWind))]
 public class Player : MonoBehaviour {
     Rigidbody myRB;
     public float throttleSpeed = 7;
@@ -22,12 +22,18 @@ public class Player : MonoBehaviour {
     public Transform grappleGun;
     public GameObject hook;
     public GameObject rope;
+    public GameObject mast;
+    public GameObject flag;
     bool launched;
     public bool attached;
     public HarpoonLauncher harpoonLauncher;
 
+    TrackWind windScript;
+    bool sailEnabled = false;
+
     // Use this for initialization
     void Start () {
+        windScript = GetComponent<TrackWind>();
         solidLayers = ~(waterLayer | playerLayer | currentLayer);
         myRB = GetComponent<Rigidbody>();
 	}
@@ -69,6 +75,11 @@ public class Player : MonoBehaviour {
                 Fire();
             }
         }
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            sailEnabled = !sailEnabled;
+            mast.SetActive(sailEnabled);
+        }
 
 
 
@@ -85,6 +96,34 @@ public class Player : MonoBehaviour {
         //myRB.AddTorque(Input.GetAxis("Horizontal") * -0.1f * transform.forward, ForceMode.Impulse);
         float thrust = Mathf.Max(0, Input.GetAxis("Vertical"));
         myRB.AddTorque(-0.5f * thrust * transform.right);
+
+        if (sailEnabled)
+        {
+            Vector3 playerForward = TrackWind.MakeHorizontal(transform.forward);
+            float angle = Vector3.Angle(windScript.GetWind(), playerForward);
+            float power = AngleToSailPower(angle);
+            myRB.AddForce(windScript.GetWind().magnitude * power * transform.forward);
+
+            
+            if(windScript.GetWind().magnitude > 0)
+            {
+                //Animate Flag
+                flag.transform.LookAt(flag.transform.position + windScript.GetWind());
+                //Animate Mast
+                int side = Vector3.Cross(windScript.GetWind(), playerForward).y > 0 ? 1 : -1;
+                Debug.Log(angle);
+                mast.transform.localRotation = Quaternion.Euler(0, side * (180 - angle) / 2, 0);
+            }
+            else
+            {
+                //Animate Flag
+                flag.transform.LookAt(transform.position - 2 * transform.forward);
+                //Animate Mast
+                mast.transform.localRotation = Quaternion.identity;
+            }
+
+            
+        }
         
         if (attached)
         {
@@ -113,5 +152,17 @@ public class Player : MonoBehaviour {
         hook.GetComponent<Grapple>().Detach();
         launched = false;
         attached = false;
+    }
+
+    float AngleToSailPower(float angle)
+    {
+        //Calculate thrust drop-off for a headwind
+        float upwind;
+        upwind = -0.03905f * (angle - 135);
+        upwind = Mathf.Clamp(upwind, -0.5857f, 0);
+        //Calculate the sail thrust based on the angle
+        float compliment = 180 - angle;
+        float power = -0.0000428f * compliment * compliment + 0.00838f * compliment + 0.5857f;
+        return power + upwind;
     }
 }

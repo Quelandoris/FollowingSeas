@@ -14,18 +14,18 @@ public class WaterLevel : Toggleable {
 		
 	}
 
-    public override void Positive()
+    public override void Primary()
     {
         //Raise water
     }
 
-    public override void Negative()
+    public override void Secondary()
     {
         //lower water
     }
 
     public override void Toggle()
     {
-        //raise or lower water depending on current state
+        BasicToggle();
     }
 }

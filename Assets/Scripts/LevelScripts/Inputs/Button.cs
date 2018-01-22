@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Actions { TOGGLE, POSITIVE, NEGATIVE}
+
 
 public class Button : MonoBehaviour, IHarpoonable {
 
@@ -16,11 +16,11 @@ public class Button : MonoBehaviour, IHarpoonable {
             case Actions.TOGGLE:
                 objectToAffect.Toggle();
                 break;
-            case Actions.POSITIVE:
-                objectToAffect.Positive();
+            case Actions.PRIMARY:
+                objectToAffect.Primary();
                 break;
-            case Actions.NEGATIVE:
-                objectToAffect.Negative();
+            case Actions.SECONDARY:
+                objectToAffect.Secondary();
                 break;
         }
     }
