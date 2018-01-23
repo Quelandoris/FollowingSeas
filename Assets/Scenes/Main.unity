@@ -2139,11 +2139,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraMoveSpeed: 120
-  CameraFollowObj: {fileID: 2023738385}
+  cameraFollowObj: {fileID: 2023738385}
   clampAngle: 66
   inputSensitivity: 100
-  Cam: {fileID: 0}
-  Player: {fileID: 0}
+  cam: {fileID: 0}
+  player: {fileID: 1308488539}
   mouseX: 0
   mouseY: 0
   smoothX: 0
@@ -4749,6 +4749,11 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1293016862}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1308488539 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1922923100584142, guid: 57dd9aa613a3a3f4ba3ffe4223ed98a2,
+    type: 2}
+  m_PrefabInternal: {fileID: 809696886}
 --- !u!1 &1316615798
 GameObject:
   m_ObjectHideFlags: 0
