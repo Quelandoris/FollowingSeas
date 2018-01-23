@@ -2911,6 +2911,16 @@ Prefab:
       propertyPath: CameraFollowObj
       value: 
       objectReference: {fileID: 485971945}
+    - target: {fileID: 114354780914244188, guid: b02a5842f7135fa4c9c0a1205b0841ca,
+        type: 2}
+      propertyPath: cameraFollowObj
+      value: 
+      objectReference: {fileID: 485971945}
+    - target: {fileID: 114354780914244188, guid: b02a5842f7135fa4c9c0a1205b0841ca,
+        type: 2}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1070655690}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b02a5842f7135fa4c9c0a1205b0841ca, type: 2}
   m_IsPrefabParent: 0
@@ -4581,6 +4591,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 32
   m_LocalEulerAnglesHint: {x: -11.009001, y: -3.0040002, z: 15.363001}
+--- !u!1 &1070655690 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1922923100584142, guid: 57dd9aa613a3a3f4ba3ffe4223ed98a2,
+    type: 2}
+  m_PrefabInternal: {fileID: 387285191}
 --- !u!1 &1099728364
 GameObject:
   m_ObjectHideFlags: 0
