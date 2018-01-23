@@ -6,6 +6,7 @@ public class Harpoon : MonoBehaviour
 {
     Rigidbody rb;
     public float thrust = 500;
+    private Transform anchor;
     //private bool haveJoint = false;
 
 
@@ -13,6 +14,14 @@ public class Harpoon : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.AddForce(transform.forward * thrust);
+    }
+    private void Update()
+    {
+        if(this.anchor != null)
+        {
+            this.transform.position = anchor.transform.position;
+            this.transform.rotation = anchor.transform.rotation;
+        }
     }
 
     public void OnTriggerEnter(Collider other)
@@ -34,16 +43,22 @@ public class Harpoon : MonoBehaviour
              rb.useGravity = true;
          }*/
         HarpoonHit(other.gameObject);
+        GameObject anchor = new GameObject("Harpoon_Anchor");
+        anchor.transform.position = this.transform.position;
+        anchor.transform.rotation = this.transform.rotation;
+        anchor.transform.parent = other.transform;
+        this.anchor = anchor.transform;
     }
 
     void HarpoonHit(GameObject hit)
     {
         rb.constraints = RigidbodyConstraints.FreezeAll;
         rb.detectCollisions = false;
-        transform.parent = hit.transform;
+        
 
         if (hit.CompareTag("Harpoon"))
         {
+            Destroy(gameObject);
             try
             {
                 hit.GetComponentInParent<IHarpoonable>().OnHarpoon();

@@ -10,9 +10,7 @@ public class CameraFollowWithoutMouse : MonoBehaviour {
     public float inputSensitivity = 150.0f;
     public GameObject Cam;
     public GameObject Player;
-    public float camDistanceXtoPlayer;
-    public float camDistanceYtoPlayer;
-    public float camDistanceZtoPlayer;
+    
     public float mouseX;
     public float mouseY;
 
@@ -21,6 +19,7 @@ public class CameraFollowWithoutMouse : MonoBehaviour {
     private float rotationY = 0.0f;
     private float rotationX = 0.0f;
 
+    
     private void Start()
     {
         Vector3 rot = transform.localRotation.eulerAngles;
