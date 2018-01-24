@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class CameraFollowWithoutMouse : MonoBehaviour {
     public float cameraMoveSpeed = 120.0f;
-    public GameObject CameraFollowObj;
-    Vector3 FollowPos;
+    public GameObject cameraFollowObj;
+    float followHeight;
     public float clampAngle = 66.0f;
     public float inputSensitivity = 150.0f;
-    public GameObject Cam;
-    public GameObject Player;
+    public GameObject cam;
+    public GameObject player;
     
     public float mouseX;
     public float mouseY;
@@ -22,6 +22,8 @@ public class CameraFollowWithoutMouse : MonoBehaviour {
     
     private void Start()
     {
+        followHeight = cameraFollowObj.transform.localPosition.y;
+        transform.position = player.transform.position + Vector3.up * followHeight;
         Vector3 rot = transform.localRotation.eulerAngles;
         rotationY = rot.y;
         rotationX = rot.x;
@@ -47,9 +49,9 @@ public class CameraFollowWithoutMouse : MonoBehaviour {
     }
     private void CameraUpdater()
     {
-        Transform target = CameraFollowObj.transform;
+        Vector3 target = player.transform.position + Vector3.up * followHeight;
         //move toward the game object that is the target
         float step = cameraMoveSpeed * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, target.position, step);
+        transform.position = Vector3.MoveTowards(transform.position, target, step);
     }
 }
