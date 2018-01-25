@@ -5,7 +5,7 @@ using UnityEngine;
 public class Grapple : MonoBehaviour {
 
     public Rigidbody player;
-
+    Transform hook;
     public Transform rope;
     public Collider hookCollider;
     bool active;
@@ -22,6 +22,12 @@ public class Grapple : MonoBehaviour {
     }
     void FixedUpdate()
     {
+        if (anchor != null)
+        {
+            float ropeLength = Vector3.Distance(gameObject.transform.position, player.transform.position);
+            Debug.Log(ropeLength);
+        }
+        
         if (active)
         {
             transform.Translate(Vector3.forward);
@@ -63,7 +69,12 @@ public class Grapple : MonoBehaviour {
 
     public void Detach()
     {
-        Destroy(anchor.gameObject);
+        try
+        {
+            Destroy(anchor.gameObject);
+        }
+        catch {
+        }
         attachedRB = null;
         active = false;
     }
