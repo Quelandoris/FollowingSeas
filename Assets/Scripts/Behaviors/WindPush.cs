@@ -6,7 +6,7 @@ using UnityEngine;
 public class WindPush : MonoBehaviour {
     TrackWind windScript;
     Rigidbody myRB;
-    static float windMult = 0.15f;
+    static float windMult = 0.1f;
 
 	void Start () {
         windScript = GetComponentInParent<TrackWind>();
