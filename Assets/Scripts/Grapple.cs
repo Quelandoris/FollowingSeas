@@ -50,6 +50,7 @@ public class Grapple : MonoBehaviour {
         }
         if (attachedRB != null)
         {
+            
             attachedRB.AddForceAtPosition(Player.grappleStrength * (rope.position - transform.position).normalized, transform.position);
         }
         
@@ -76,13 +77,7 @@ public class Grapple : MonoBehaviour {
             Deactivate();
             player.gameObject.GetComponent<Player>().attached = true;
 
-
-            Transform otherRoot = collision.transform;
-            while (otherRoot.parent != null)
-            {
-                otherRoot = otherRoot.parent;
-            }
-            attachedRB = otherRoot.GetComponent<Rigidbody>();
+            attachedRB = collision.gameObject.GetComponentInParent<Rigidbody>();
         }
 
 
