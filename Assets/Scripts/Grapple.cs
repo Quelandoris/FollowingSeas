@@ -33,7 +33,7 @@ public class Grapple : MonoBehaviour {
     void FixedUpdate()
     {
         float ropeLength = Vector3.Distance(gameObject.transform.position, player.transform.position);//ropeLength
-        Debug.Log(ropeLength);
+        
         if (ropeLength >= ropeMax)
         {
             retracting = true;
