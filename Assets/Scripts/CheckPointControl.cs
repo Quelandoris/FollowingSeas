@@ -10,7 +10,7 @@ public class CheckPointControl : MonoBehaviour {
     /// This script can only hold 5 spawn points
     /// </summary>
 	void Update () {
-        if (Input.GetKeyDown(KeyCode.U))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             try
             {
