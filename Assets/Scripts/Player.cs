@@ -24,7 +24,7 @@ public class Player : MonoBehaviour {
     public GameObject rope;
     public GameObject mast;
     public GameObject flag;
-    bool launched;
+    public static bool launched;
     public bool attached;
     public HarpoonLauncher harpoonLauncher;
 
@@ -72,7 +72,9 @@ public class Player : MonoBehaviour {
             }
             else
             {
-                Fire();
+             
+                    Fire();
+                
             }
         }
         if (Input.GetKeyDown(KeyCode.LeftShift))
@@ -131,8 +133,8 @@ public class Player : MonoBehaviour {
         }
         if (!launched)
         {
-            hook.transform.localPosition = new Vector3(0, 0, 1.5f);
-            hook.transform.localRotation = Quaternion.identity;
+           hook.transform.localPosition = new Vector3(0, 0, 1.5f);
+           hook.transform.localRotation = Quaternion.identity;
         }
     }
 
@@ -140,6 +142,8 @@ public class Player : MonoBehaviour {
     {
         hook.transform.parent = null;
         hook.GetComponent<Grapple>().Activate();
+        
+       // hook.GetComponent<Grapple>().fired = (false);
         launched = true;
     }
 
@@ -150,6 +154,8 @@ public class Player : MonoBehaviour {
         hook.transform.localScale = new Vector3(1, 1, 1);
         hook.transform.localRotation = Quaternion.identity;
         hook.GetComponent<Grapple>().Detach();
+        hook.GetComponent<Rigidbody>().isKinematic = true;
+        hook.GetComponent<Grapple>().fired = true;
         launched = false;
         attached = false;
     }
