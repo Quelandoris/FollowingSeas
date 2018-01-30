@@ -68,7 +68,9 @@ public class Player : MonoBehaviour {
         {
             if (launched)
             {
-                Retract();
+                hook.GetComponent<Grapple>().Retract();
+                attached = false;
+
             }
             else
             {
@@ -147,7 +149,7 @@ public class Player : MonoBehaviour {
         launched = true;
     }
 
-    public void Retract()
+   /* public void Retract()
     {
         hook.transform.parent = grappleGun;
         hook.transform.localPosition = new Vector3(0, 0, 1.5f);
@@ -158,7 +160,7 @@ public class Player : MonoBehaviour {
         hook.GetComponent<Grapple>().fired = true;
         launched = false;
         attached = false;
-    }
+    }*/
 
     float AngleToSailPower(float angle)
     {
