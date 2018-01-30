@@ -3,15 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Grapple : MonoBehaviour {
-
+    public float thrust = 2500;
+    public float ropeMax = 100f;
     public Rigidbody player;
+    public float retractSpeed = 60;
     Transform hook;
     public Transform rope;
     public Collider hookCollider;
     bool active;
+    public bool fired;
+    bool retracting = false;
     Rigidbody attachedRB;
+    public Transform grappleGun;
+    Rigidbody rb;
     private Transform anchor;
-
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+        fired = true;
+    }
     private void Update()
     {
         if (this.anchor != null)
@@ -22,44 +32,54 @@ public class Grapple : MonoBehaviour {
     }
     void FixedUpdate()
     {
-        if (anchor != null)
-        {
-            float ropeLength = Vector3.Distance(gameObject.transform.position, player.transform.position);
-            Debug.Log(ropeLength);
-        }
+        float ropeLength = Vector3.Distance(gameObject.transform.position, player.transform.position);//ropeLength
         
+        if (ropeLength >= ropeMax)
+        {
+            retracting = true;
+            
+        }
+        if(retracting)
+        {
+            Retract();
+        }
         if (active)
         {
-            transform.Translate(Vector3.forward);
+            
+            Shoot();
         }
-        if(attachedRB != null)
+        if (attachedRB != null)
         {
             
             attachedRB.AddForceAtPosition(Player.grappleStrength * (rope.position - transform.position).normalized, transform.position);
         }
+        
     }
 
     void OnCollisionEnter(Collision collision)
     {
+
+        fired = true;
         if (active)
         {
+           
             anchor = new GameObject("Grapple_Anchor").transform;
             anchor.transform.position = this.transform.position;
             anchor.transform.rotation = this.transform.rotation;
             anchor.transform.parent = collision.transform;
-            this.anchor = anchor.transform;
-            if (collision.gameObject.CompareTag("Harpoon"))
+            //this.anchor = anchor.transform;
+            if (!collision.gameObject.CompareTag("Grapple"))
             {
-                player.GetComponent<Player>().Retract();
-                return;
+                retracting = true;
+                Retract();
+               // return;
             }
             Deactivate();
             player.gameObject.GetComponent<Player>().attached = true;
-            //transform.parent = collision.gameObject.transform;
 
             attachedRB = collision.gameObject.GetComponentInParent<Rigidbody>();
         }
-        
+
 
     }
 
@@ -71,6 +91,8 @@ public class Grapple : MonoBehaviour {
         }
         catch {
         }
+        retracting = true;
+        //Retract();
         attachedRB = null;
         active = false;
     }
@@ -79,11 +101,67 @@ public class Grapple : MonoBehaviour {
     {
         active = true;
         hookCollider.enabled = true;
+
     }
+    void Shoot() {
+        if (fired)
+        {
+            rb.isKinematic = false;
+            rb.AddForceAtPosition(-1 * transform.up, transform.position, ForceMode.Impulse);
+            rb.AddForce(transform.forward * thrust);
+            fired = false;
+        }
+            
+            
+     }
 
     public void Deactivate()
     {
         active = false;
         hookCollider.enabled = false;
+        rb.isKinematic = true;
+    }
+    public void Retract()
+    {
+        Detach();
+        if (retracting)
+        {
+            
+
+            //  rb.useGravity = false ;
+            if (Vector3.Distance(transform.position, grappleGun.transform.position) > 1f)
+            {
+                rb.isKinematic = true;
+                rb.isKinematic = false;
+                Vector3 directionOfTravel = grappleGun.transform.position - transform.position;
+
+                directionOfTravel.Normalize();
+
+
+                this.transform.Translate(
+                    (directionOfTravel.x * retractSpeed * Time.deltaTime),
+                    (directionOfTravel.y * retractSpeed * Time.deltaTime),
+                    (directionOfTravel.z * retractSpeed * Time.deltaTime),
+                    Space.World);
+                // transform.position = Vector3.MoveTowards(transform.position, grappleGun.transform.position, 4000f * Time.deltaTime);
+
+            }
+            else
+            {
+               // retracting = false;
+                rb.isKinematic = true;
+                transform.parent = grappleGun;
+                transform.localPosition = new Vector3(0, 0, 1.5f);
+                transform.localScale = new Vector3(1, 1, 1);
+                //transform.localRotation = Quaternion.identity;
+                transform.localPosition = new Vector3(0, 0, 1.5f);
+                transform.localRotation = Quaternion.identity;
+                Player.launched=(false);
+                retracting = false;
+            }
+            fired = true;
+
+
+        }
     }
 }
