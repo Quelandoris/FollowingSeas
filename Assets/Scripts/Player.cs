@@ -31,7 +31,7 @@ public class Player : MonoBehaviour {
 
     TrackWind windScript;
     bool sailEnabled = false;
-    bool grounded;
+    public bool grounded;
     // Use this for initialization
     void Start() {
         windScript = GetComponent<TrackWind>();

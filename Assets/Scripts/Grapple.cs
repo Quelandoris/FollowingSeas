@@ -129,7 +129,7 @@ public class Grapple : MonoBehaviour {
             
 
             //  rb.useGravity = false ;
-            if (Vector3.Distance(transform.position, grappleGun.transform.position) > 1f)
+            if (Vector3.Distance(transform.position, grappleGun.transform.position) > 5f)
             {
                 rb.isKinematic = true;
                 rb.isKinematic = false;
