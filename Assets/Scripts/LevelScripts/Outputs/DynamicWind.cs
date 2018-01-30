@@ -29,6 +29,7 @@ public class DynamicWind : Toggleable
             Destroy(secondaryArrow);
         }
         GetComponent<MeshRenderer>().enabled = false;
+        wind = primaryWind;
     }
 
     void UpdateWind()
