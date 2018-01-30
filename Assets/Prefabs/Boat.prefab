@@ -1161,13 +1161,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 548e646e4d147ff4f880d27c5a9cd115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrust: 2500
+  thrust: 5000
   ropeMax: 100
   player: {fileID: 54532132841941852}
-  retractSpeed: 60
+  retractSpeed: 150
   rope: {fileID: 4352169783335240}
   hookCollider: {fileID: 64174215259120564}
-  fired: 0
+  fireable: 0
   grappleGun: {fileID: 4887511872674854}
 --- !u!114 &114081871377089772
 MonoBehaviour:
@@ -1264,6 +1264,9 @@ MonoBehaviour:
   defaultLayer:
     serializedVersion: 2
     m_Bits: 1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 4096
   grappleGun: {fileID: 4887511872674854}
   hook: {fileID: 1364741546542016}
   rope: {fileID: 1846115457673248}

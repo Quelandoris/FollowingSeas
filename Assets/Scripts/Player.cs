@@ -9,7 +9,7 @@ public class Player : MonoBehaviour {
     public float throttleSpeed = 7;
     public float rotateSpeed = 1.2f;
     public static float grappleStrength = 8;
-    
+
 
     public LayerMask waterLayer;
     public LayerMask playerLayer;
@@ -17,6 +17,7 @@ public class Player : MonoBehaviour {
     public LayerMask grappleLayer;
     public LayerMask harpoonLayer;
     public LayerMask defaultLayer;
+    public LayerMask groundLayer;
     LayerMask solidLayers;
 
     public Transform grappleGun;
@@ -30,13 +31,13 @@ public class Player : MonoBehaviour {
 
     TrackWind windScript;
     bool sailEnabled = false;
-
+    bool grounded;
     // Use this for initialization
-    void Start () {
+    void Start() {
         windScript = GetComponent<TrackWind>();
         solidLayers = ~(waterLayer | playerLayer | currentLayer);
         myRB = GetComponent<Rigidbody>();
-	}
+    }
 
     // Update is called once per frame
     void Update() {
@@ -46,7 +47,7 @@ public class Player : MonoBehaviour {
         }
         RaycastHit mouseHit;
         Vector3 lookTarget;
-        if(Physics.Raycast(new Ray(Camera.main.transform.position, Camera.main.transform.forward), out mouseHit, 100000, solidLayers))
+        if (Physics.Raycast(new Ray(Camera.main.transform.position, Camera.main.transform.forward), out mouseHit, 100000, solidLayers))
         {
             lookTarget = mouseHit.point;
         }
@@ -63,7 +64,7 @@ public class Player : MonoBehaviour {
         {
             harpoonLauncher.isShooting = false;
         }
-        
+
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             if (launched)
@@ -74,9 +75,9 @@ public class Player : MonoBehaviour {
             }
             else
             {
-             
-                    Fire();
-                
+
+                Fire();
+
             }
         }
         if (Input.GetKeyDown(KeyCode.LeftShift))
@@ -90,17 +91,18 @@ public class Player : MonoBehaviour {
 
         rope.transform.LookAt(hook.transform.position);
         rope.transform.localScale = new Vector3(1, 1, Vector3.Distance(hook.transform.position, rope.transform.position));
-	}
+    }
 
     private void FixedUpdate()
     {
-        myRB.AddForce(Input.GetAxis("Vertical") * throttleSpeed * transform.forward, ForceMode.Acceleration);
+        if (!grounded){
+        myRB.AddForce(Input.GetAxis("Vertical") * throttleSpeed* transform.forward, ForceMode.Acceleration);
         TurnShip();
         myRB.AddTorque(Input.GetAxis("Horizontal") * -1 * transform.forward);
         //myRB.AddTorque(Input.GetAxis("Horizontal") * -0.1f * transform.forward, ForceMode.Impulse);
         float thrust = Mathf.Max(0, Input.GetAxis("Vertical"));
-        myRB.AddTorque(-0.5f * thrust * transform.right);
-
+         myRB.AddTorque(-0.5f * thrust* transform.right);
+        }
         if (sailEnabled)
         {
             Vector3 playerForward = TrackWind.MakeHorizontal(transform.forward);
@@ -128,6 +130,7 @@ public class Player : MonoBehaviour {
             
         }
         
+        
         if (attached)
         {
             myRB.AddForce(grappleStrength * (hook.transform.position - transform.position).normalized);
@@ -136,6 +139,17 @@ public class Player : MonoBehaviour {
         {
            hook.transform.localPosition = new Vector3(0, 0, 1.5f);
            hook.transform.localRotation = Quaternion.identity;
+        }
+    }
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Grapple"))
+        {
+            grounded = true;
+        }
+        else
+        {
+            grounded = false;
         }
     }
 
