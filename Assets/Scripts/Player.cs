@@ -143,7 +143,7 @@ public class Player : MonoBehaviour {
     }
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Grapple"))
+        if (collision.gameObject.CompareTag("Ground"))
         {
             grounded = true;
         }
