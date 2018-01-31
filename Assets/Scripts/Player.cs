@@ -17,7 +17,7 @@ public class Player : MonoBehaviour {
     public LayerMask grappleLayer;
     public LayerMask harpoonLayer;
     public LayerMask defaultLayer;
-    public LayerMask groundLayer;
+   
     LayerMask solidLayers;
 
     public Transform grappleGun;
