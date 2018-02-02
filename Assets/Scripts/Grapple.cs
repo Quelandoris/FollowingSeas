@@ -11,7 +11,7 @@ public class Grapple : MonoBehaviour {
     public Transform rope;
     public Collider hookCollider;
     bool active;
-    public bool fired;
+    public bool fireable;
     bool retracting = false;
     Rigidbody attachedRB;
     public Transform grappleGun;
@@ -20,7 +20,7 @@ public class Grapple : MonoBehaviour {
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        fired = true;
+        fireable = true;
     }
     private void Update()
     {
@@ -59,7 +59,7 @@ public class Grapple : MonoBehaviour {
     void OnCollisionEnter(Collision collision)
     {
 
-        fired = true;
+        fireable = true;
         if (active)
         {
            
@@ -104,12 +104,12 @@ public class Grapple : MonoBehaviour {
 
     }
     void Shoot() {
-        if (fired)
+        if (fireable)
         {
             rb.isKinematic = false;
             rb.AddForceAtPosition(-1 * transform.up, transform.position, ForceMode.Impulse);
             rb.AddForce(transform.forward * thrust);
-            fired = false;
+            fireable = false;
         }
             
             
@@ -129,7 +129,7 @@ public class Grapple : MonoBehaviour {
             
 
             //  rb.useGravity = false ;
-            if (Vector3.Distance(transform.position, grappleGun.transform.position) > 1f)
+            if (Vector3.Distance(transform.position, grappleGun.transform.position) > 5f)
             {
                 rb.isKinematic = true;
                 rb.isKinematic = false;
@@ -159,7 +159,7 @@ public class Grapple : MonoBehaviour {
                 Player.launched=(false);
                 retracting = false;
             }
-            fired = true;
+            fireable = true;
 
 
         }

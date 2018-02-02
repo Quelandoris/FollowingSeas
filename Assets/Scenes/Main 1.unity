@@ -391,6 +391,9 @@ MonoBehaviour:
   defaultLayer:
     serializedVersion: 2
     m_Bits: 0
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
   grappleGun: {fileID: 714735041}
   hook: {fileID: 1564743172}
   rope: {fileID: 1203836436}
@@ -398,6 +401,7 @@ MonoBehaviour:
   flag: {fileID: 0}
   attached: 0
   harpoonLauncher: {fileID: 0}
+  grounded: 0
 --- !u!114 &141873888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3309,6 +3313,10 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 1308488539}
+    - target: {fileID: 4500321207691716, guid: 03c2de569a5d3d24ba988d5757985c46, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -23.42
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 03c2de569a5d3d24ba988d5757985c46, type: 2}
   m_IsPrefabParent: 0
@@ -3922,7 +3930,7 @@ MonoBehaviour:
   retractSpeed: 100
   rope: {fileID: 1254517028}
   hookCollider: {fileID: 981662488}
-  fired: 0
+  fireable: 0
   grappleGun: {fileID: 1959936151}
 --- !u!54 &981662487
 Rigidbody:
@@ -5609,6 +5617,9 @@ MonoBehaviour:
   defaultLayer:
     serializedVersion: 2
     m_Bits: 1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 4096
   grappleGun: {fileID: 1959936151}
   hook: {fileID: 981662484}
   rope: {fileID: 1254517027}
@@ -5616,6 +5627,7 @@ MonoBehaviour:
   flag: {fileID: 1567233369}
   attached: 0
   harpoonLauncher: {fileID: 1438374975}
+  grounded: 0
 --- !u!1 &1316615798
 GameObject:
   m_ObjectHideFlags: 0
@@ -6550,7 +6562,7 @@ MonoBehaviour:
   retractSpeed: 4000
   rope: {fileID: 0}
   hookCollider: {fileID: 1929960785}
-  fired: 0
+  fireable: 0
   grappleGun: {fileID: 0}
 --- !u!54 &1564743174
 Rigidbody:
@@ -8888,6 +8900,9 @@ MonoBehaviour:
   defaultLayer:
     serializedVersion: 2
     m_Bits: 1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
   grappleGun: {fileID: 1959936151}
   hook: {fileID: 981662484}
   rope: {fileID: 1254517027}
@@ -8895,6 +8910,7 @@ MonoBehaviour:
   flag: {fileID: 0}
   attached: 0
   harpoonLauncher: {fileID: 1438374975}
+  grounded: 0
 --- !u!114 &1997290153
 MonoBehaviour:
   m_ObjectHideFlags: 0
