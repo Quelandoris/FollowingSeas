@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 54886710461156866}
   - component: {fileID: 114661009196133598}
   - component: {fileID: 114554736224841418}
+  - component: {fileID: 114304710437717310}
   - component: {fileID: 135689003340885190}
   m_Layer: 12
   m_Name: CurrentLine
@@ -144,6 +145,17 @@ TrailRenderer:
     generateLightingData: 0
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
+--- !u!114 &114304710437717310
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1576075740123926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04d02a97de4a6ed48ad204f4d2892ae3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114554736224841418
 MonoBehaviour:
   m_ObjectHideFlags: 1
