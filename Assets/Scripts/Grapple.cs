@@ -5,6 +5,7 @@ using UnityEngine;
 public class Grapple : MonoBehaviour {
     public float thrust = 2500;
     public float ropeMax = 100f;
+    float scrollSpeed = 75;
     public Rigidbody player;
     public float retractSpeed = 60;
     Transform hook;
@@ -50,10 +51,10 @@ public class Grapple : MonoBehaviour {
         }
         if (attachedRB != null)
         {
-            
-            attachedRB.AddForceAtPosition(Player.grappleStrength * (rope.position - transform.position).normalized, transform.position);
+            // += Input.GetAxis("Mouse ScrollWheel") * scrollSpeed;
+            attachedRB.AddForceAtPosition((Input.GetAxis("Mouse ScrollWheel") * -scrollSpeed) * (rope.position - transform.position).normalized, transform.position);
         }
-        
+       
     }
 
     void OnCollisionEnter(Collision collision)
