@@ -32,6 +32,7 @@ public class Player : MonoBehaviour {
     TrackWind windScript;
     bool sailEnabled = false;
     public bool grounded;
+    float scrollSpeed = -75;
     // Use this for initialization
     void Start() {
         windScript = GetComponent<TrackWind>();
@@ -133,7 +134,8 @@ public class Player : MonoBehaviour {
         
         if (attached)
         {
-            myRB.AddForce(grappleStrength * (hook.transform.position - transform.position).normalized);
+            
+            myRB.AddForce((Input.GetAxis("Mouse ScrollWheel") * scrollSpeed) * (hook.transform.position - transform.position).normalized);
         }
         if (!launched)
         {
