@@ -191,6 +191,7 @@ public class Player : MonoBehaviour {
         Vector3 onlyForward = Vector3.Project(velocity, transform.forward);
         Vector3 otherVel = velocity - onlyForward;
         transform.Rotate(Input.GetAxis("Horizontal") * rotateSpeed * Vector3.up, Space.World);
-        myRB.velocity = onlyForward.magnitude * transform.forward + otherVel;
+        float sign = (onlyForward.normalized + transform.forward).magnitude > 1 ? 1 : -1;
+        myRB.velocity = onlyForward.magnitude * sign * transform.forward + otherVel;
     }
 }
