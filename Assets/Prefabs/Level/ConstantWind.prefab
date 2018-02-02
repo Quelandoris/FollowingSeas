@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 65530717260686286}
   - component: {fileID: 23022358773270008}
   - component: {fileID: 114435637843924212}
+  - component: {fileID: 114902666245494566}
   m_Layer: 9
   m_Name: WindCollider
   m_TagString: Untagged
@@ -206,3 +207,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arrow: {fileID: 1631108939557622}
   force: 0
+--- !u!114 &114902666245494566
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000618682855112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ea00aed99590e247b73064b683a23c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waterLayer:
+    serializedVersion: 2
+    m_Bits: 16
+  particleFrequency: 0.25
+  windEffectFab: {fileID: 1318474291993282, guid: bccf649848f020140929f1bf97adaead,
+    type: 2}
