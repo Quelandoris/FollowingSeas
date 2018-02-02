@@ -328,6 +328,7 @@ GameObject:
   - component: {fileID: 54532132841941852}
   - component: {fileID: 114479876026123286}
   - component: {fileID: 114093044428523816}
+  - component: {fileID: 114261802126113058}
   m_Layer: 0
   m_Name: Boat
   m_TagString: Player
@@ -617,7 +618,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1922923100584142}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 153.6, y: 5.15, z: 0.45}
+  m_LocalPosition: {x: 139.82007, y: 5, z: -0.4807701}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4397088564321124}
@@ -1206,6 +1207,17 @@ MonoBehaviour:
   harpoon: {fileID: 114812920125523088, guid: efa90fe7fc4fae0459357b6a7a0966f9, type: 2}
   timeBetweenShots: 0.5
   firePoint: {fileID: 4377551612031642}
+--- !u!114 &114261802126113058
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1922923100584142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04d02a97de4a6ed48ad204f4d2892ae3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114479876026123286
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1264,9 +1276,6 @@ MonoBehaviour:
   defaultLayer:
     serializedVersion: 2
     m_Bits: 1
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 4096
   grappleGun: {fileID: 4887511872674854}
   hook: {fileID: 1364741546542016}
   rope: {fileID: 1846115457673248}
@@ -1274,6 +1283,7 @@ MonoBehaviour:
   flag: {fileID: 1048751845743248}
   attached: 0
   harpoonLauncher: {fileID: 114118657191747348}
+  grounded: 0
 --- !u!136 &136810334318808610
 CapsuleCollider:
   m_ObjectHideFlags: 1

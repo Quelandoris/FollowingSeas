@@ -19,7 +19,7 @@ public class Current : MonoBehaviour {
         GetComponent<MeshRenderer>().enabled = false;
     }
 
-    void FixedUpdate()
+    /*void FixedUpdate()
     {
         if (affectedObjects == null)
         {
@@ -40,7 +40,7 @@ public class Current : MonoBehaviour {
             }
             RemoveDeletedObjects();
         }
-    }
+    }    
 
     void RemoveDeletedObjects()
     {
@@ -74,5 +74,10 @@ public class Current : MonoBehaviour {
                 affectedObjects.Remove(otherBody);
             }
         }
+    }*/
+
+    public Vector3 GetForce()
+    {
+        return direction.normalized * force;
     }
 }
