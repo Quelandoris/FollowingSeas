@@ -153,7 +153,7 @@ public class Grapple : MonoBehaviour {
                 rb.isKinematic = true;
                 transform.parent = grappleGun;
                 transform.localPosition = new Vector3(0, 0, 1.5f);
-                transform.localScale = new Vector3(1, 1, 1);
+               // transform.localScale = new Vector3(1, 1, 1);
                 //transform.localRotation = Quaternion.identity;
                 transform.localPosition = new Vector3(0, 0, 1.5f);
                 transform.localRotation = Quaternion.identity;
