@@ -23,9 +23,9 @@ GameObject:
   - component: {fileID: 23539514689220122}
   - component: {fileID: 114812920125523088}
   - component: {fileID: 54576344644689804}
-  - component: {fileID: 136580413383221358}
-  - component: {fileID: 136995069024902956}
   - component: {fileID: 114498742717402856}
+  - component: {fileID: 136820997019330480}
+  - component: {fileID: 136609369565512304}
   m_Layer: 10
   m_Name: Harpoon
   m_TagString: Untagged
@@ -40,8 +40,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1477209547746214}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 145.75682, y: 6.48, z: 8.133297}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.25}
+  m_LocalPosition: {x: 142.57858, y: 5, z: 6.0563636}
+  m_LocalScale: {x: 15, y: 15, z: 400}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -84,7 +84,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1477209547746214}
-  m_Mesh: {fileID: 4300000, guid: b79902ed55d853744aab46f35db4b623, type: 3}
+  m_Mesh: {fileID: 4300026, guid: 3f740d2199568d945a795bba9473bfa0, type: 3}
 --- !u!54 &54576344644689804
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -99,7 +99,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 2
+  m_CollisionDetection: 0
 --- !u!114 &114498742717402856
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -124,20 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thrust: 5000
---- !u!136 &136580413383221358
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1477209547746214}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.3
-  m_Height: 9.40049
-  m_Direction: 2
-  m_Center: {x: -0.6244354, y: 0, z: -2.799755}
---- !u!136 &136995069024902956
+--- !u!136 &136609369565512304
 CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -146,7 +133,20 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.3
-  m_Height: 8.803856
+  m_Radius: 0.010627762
+  m_Height: 0.009392114
   m_Direction: 2
-  m_Center: {x: 0, y: 0, z: -2.598072}
+  m_Center: {x: 0, y: 0, z: 0.0005076542}
+--- !u!136 &136820997019330480
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1477209547746214}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.010627762
+  m_Height: 0.009588073
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0.00040968}
