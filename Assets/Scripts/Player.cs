@@ -32,6 +32,7 @@ public class Player : MonoBehaviour {
     TrackWind windScript;
     bool sailEnabled = false;
     public bool grounded;
+    public bool attachedToRB= false;
     float scrollSpeed = -75;
     // Use this for initialization
     void Start() {
@@ -96,13 +97,13 @@ public class Player : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        if (!grounded){
-        myRB.AddForce(Input.GetAxis("Vertical") * throttleSpeed* transform.forward, ForceMode.Acceleration);
-        TurnShip();
-        myRB.AddTorque(Input.GetAxis("Horizontal") * -1 * transform.forward);
-        //myRB.AddTorque(Input.GetAxis("Horizontal") * -0.1f * transform.forward, ForceMode.Impulse);
-        float thrust = Mathf.Max(0, Input.GetAxis("Vertical"));
-         myRB.AddTorque(-0.5f * thrust* transform.right);
+        if (!grounded) {
+            myRB.AddForce(Input.GetAxis("Vertical") * throttleSpeed * transform.forward, ForceMode.Acceleration);
+            TurnShip();
+            myRB.AddTorque(Input.GetAxis("Horizontal") * -1 * transform.forward);
+            //myRB.AddTorque(Input.GetAxis("Horizontal") * -0.1f * transform.forward, ForceMode.Impulse);
+            float thrust = Mathf.Max(0, Input.GetAxis("Vertical"));
+            myRB.AddTorque(-0.5f * thrust * transform.right);
         }
         if (sailEnabled)
         {
@@ -111,8 +112,8 @@ public class Player : MonoBehaviour {
             float power = AngleToSailPower(angle);
             myRB.AddForce(windScript.GetWind().magnitude * power * transform.forward);
 
-            
-            if(windScript.GetWind().magnitude > 0)
+
+            if (windScript.GetWind().magnitude > 0)
             {
                 //Animate Flag
                 flag.transform.LookAt(flag.transform.position + windScript.GetWind());
@@ -128,15 +129,16 @@ public class Player : MonoBehaviour {
                 mast.transform.localRotation = Quaternion.identity;
             }
 
-            
+
         }
-        
-        
+
+
         if (attached)
         {
-            
+            if (attachedToRB) { 
             myRB.AddForce((Input.GetAxis("Mouse ScrollWheel") * scrollSpeed) * (hook.transform.position - transform.position).normalized);
         }
+         }
         if (!launched)
         {
           // hook.transform.localPosition = new Vector3(0, -8f, 0);
