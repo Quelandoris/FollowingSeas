@@ -130,7 +130,7 @@ public class Grapple : MonoBehaviour {
             
 
             //  rb.useGravity = false ;
-            if (Vector3.Distance(transform.position, grappleGun.transform.position) > 5f)
+            if (Vector3.Distance(transform.position, grappleGun.transform.position) > 1f)
             {
                 rb.isKinematic = true;
                 rb.isKinematic = false;
@@ -151,12 +151,12 @@ public class Grapple : MonoBehaviour {
             {
                // retracting = false;
                 rb.isKinematic = true;
-                transform.parent = grappleGun;
-                transform.localPosition = new Vector3(0, 0, 1.5f);
+               transform.parent = grappleGun;
+              //  transform.localPosition = new Vector3(0, 0, 1.5f);
                // transform.localScale = new Vector3(1, 1, 1);
-                //transform.localRotation = Quaternion.identity;
-                transform.localPosition = new Vector3(0, 0, 1.5f);
-                transform.localRotation = Quaternion.identity;
+               // transform.localRotation = Quaternion.identity;
+               // transform.localPosition = new Vector3(0, 0, 1.5f);
+              //  transform.localRotation = Quaternion.identity;
                 Player.launched=(false);
                 retracting = false;
             }

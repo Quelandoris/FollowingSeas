@@ -139,7 +139,7 @@ public class Player : MonoBehaviour {
         }
         if (!launched)
         {
-           hook.transform.localPosition = new Vector3(0, 0, 1.5f);
+          // hook.transform.localPosition = new Vector3(0, -8f, 0);
            hook.transform.localRotation = Quaternion.identity;
         }
     }
