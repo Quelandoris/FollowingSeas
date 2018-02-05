@@ -17,7 +17,7 @@ public class Player : MonoBehaviour {
     public LayerMask grappleLayer;
     public LayerMask harpoonLayer;
     public LayerMask defaultLayer;
-    public LayerMask groundLayer;
+   
     LayerMask solidLayers;
 
     public Transform grappleGun;
@@ -31,7 +31,7 @@ public class Player : MonoBehaviour {
 
     TrackWind windScript;
     bool sailEnabled = false;
-    bool grounded;
+    public bool grounded;
     // Use this for initialization
     void Start() {
         windScript = GetComponent<TrackWind>();
@@ -143,7 +143,7 @@ public class Player : MonoBehaviour {
     }
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Grapple"))
+        if (collision.gameObject.CompareTag("Ground"))
         {
             grounded = true;
         }
