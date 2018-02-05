@@ -28,12 +28,17 @@ public class Player : MonoBehaviour {
     public static bool launched;
     public bool attached;
     public HarpoonLauncher harpoonLauncher;
+    public Animator Anim;
+    public float foldingSpeed;
 
     TrackWind windScript;
     bool sailEnabled = false;
     public bool grounded;
+    public bool attachedToRB= false;
+    float scrollSpeed = -75;
     // Use this for initialization
     void Start() {
+        Anim.GetComponent<Animator>();
         windScript = GetComponent<TrackWind>();
         solidLayers = ~(waterLayer | playerLayer | currentLayer);
         myRB = GetComponent<Rigidbody>();
@@ -83,7 +88,19 @@ public class Player : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             sailEnabled = !sailEnabled;
-            mast.SetActive(sailEnabled);
+           // mast.SetActive(sailEnabled);
+            if (sailEnabled)
+            {
+                Anim.SetBool("FullMast", false);
+                Anim.Play("FullMast");
+                foldingSpeed = 1;
+            }
+            else
+            {
+                Anim.SetBool("FullMast", true);
+                Anim.Play("FullMast");
+                foldingSpeed = -1;
+            }
         }
 
 
@@ -95,13 +112,13 @@ public class Player : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        if (!grounded){
-        myRB.AddForce(Input.GetAxis("Vertical") * throttleSpeed* transform.forward, ForceMode.Acceleration);
-        TurnShip();
-        myRB.AddTorque(Input.GetAxis("Horizontal") * -1 * transform.forward);
-        //myRB.AddTorque(Input.GetAxis("Horizontal") * -0.1f * transform.forward, ForceMode.Impulse);
-        float thrust = Mathf.Max(0, Input.GetAxis("Vertical"));
-         myRB.AddTorque(-0.5f * thrust* transform.right);
+        if (!grounded) {
+            myRB.AddForce(Input.GetAxis("Vertical") * throttleSpeed * transform.forward, ForceMode.Acceleration);
+            TurnShip();
+            myRB.AddTorque(Input.GetAxis("Horizontal") * -1 * transform.forward);
+            //myRB.AddTorque(Input.GetAxis("Horizontal") * -0.1f * transform.forward, ForceMode.Impulse);
+            float thrust = Mathf.Max(0, Input.GetAxis("Vertical"));
+            myRB.AddTorque(-0.5f * thrust * transform.right);
         }
         if (sailEnabled)
         {
@@ -110,8 +127,8 @@ public class Player : MonoBehaviour {
             float power = AngleToSailPower(angle);
             myRB.AddForce(windScript.GetWind().magnitude * power * transform.forward);
 
-            
-            if(windScript.GetWind().magnitude > 0)
+
+            if (windScript.GetWind().magnitude > 0)
             {
                 //Animate Flag
                 flag.transform.LookAt(flag.transform.position + windScript.GetWind());
@@ -126,18 +143,23 @@ public class Player : MonoBehaviour {
                 //Animate Mast
                 mast.transform.localRotation = Quaternion.identity;
             }
-
-            
+           
         }
-        
-        
+        else
+        {
+
+        }
+
+
         if (attached)
         {
-            myRB.AddForce(grappleStrength * (hook.transform.position - transform.position).normalized);
+            if (attachedToRB) { 
+            myRB.AddForce((Input.GetAxis("Mouse ScrollWheel") * scrollSpeed) * (hook.transform.position - transform.position).normalized);
         }
+         }
         if (!launched)
         {
-           hook.transform.localPosition = new Vector3(0, 0, 1.5f);
+          // hook.transform.localPosition = new Vector3(0, -8f, 0);
            hook.transform.localRotation = Quaternion.identity;
         }
     }
@@ -181,7 +203,7 @@ public class Player : MonoBehaviour {
         float compliment = 180f - angle;
         float fraction = compliment / 180f;
         float power = 8f * (fraction * fraction * fraction) - 18f * (fraction * fraction) + 12f * fraction - 1.5f;
-        Debug.Log(power);
+        //Debug.Log(power);
         return Mathf.Max(0, power);
     }
 
@@ -191,6 +213,7 @@ public class Player : MonoBehaviour {
         Vector3 onlyForward = Vector3.Project(velocity, transform.forward);
         Vector3 otherVel = velocity - onlyForward;
         transform.Rotate(Input.GetAxis("Horizontal") * rotateSpeed * Vector3.up, Space.World);
-        myRB.velocity = onlyForward.magnitude * transform.forward + otherVel;
+        float sign = (onlyForward.normalized + transform.forward).magnitude > 1 ? 1 : -1;
+        myRB.velocity = onlyForward.magnitude * sign * transform.forward + otherVel;
     }
 }

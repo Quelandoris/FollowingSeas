@@ -5,6 +5,7 @@ using UnityEngine;
 public class Grapple : MonoBehaviour {
     public float thrust = 2500;
     public float ropeMax = 100f;
+    float scrollSpeed = 75;
     public Rigidbody player;
     public float retractSpeed = 60;
     Transform hook;
@@ -50,10 +51,10 @@ public class Grapple : MonoBehaviour {
         }
         if (attachedRB != null)
         {
-            
-            attachedRB.AddForceAtPosition(Player.grappleStrength * (rope.position - transform.position).normalized, transform.position);
+            // += Input.GetAxis("Mouse ScrollWheel") * scrollSpeed;
+            attachedRB.AddForceAtPosition((Input.GetAxis("Mouse ScrollWheel") * -scrollSpeed) * (rope.position - transform.position).normalized, transform.position);
         }
-        
+       
     }
 
     void OnCollisionEnter(Collision collision)
@@ -78,6 +79,10 @@ public class Grapple : MonoBehaviour {
             player.gameObject.GetComponent<Player>().attached = true;
 
             attachedRB = collision.gameObject.GetComponentInParent<Rigidbody>();
+            if (collision.gameObject.GetComponent<Rigidbody>() == null)
+            {
+                player.gameObject.GetComponent<Player>().attachedToRB = true;
+            }
         }
 
 
@@ -129,7 +134,7 @@ public class Grapple : MonoBehaviour {
             
 
             //  rb.useGravity = false ;
-            if (Vector3.Distance(transform.position, grappleGun.transform.position) > 5f)
+            if (Vector3.Distance(transform.position, grappleGun.transform.position) > 1f)
             {
                 rb.isKinematic = true;
                 rb.isKinematic = false;
@@ -144,22 +149,26 @@ public class Grapple : MonoBehaviour {
                     (directionOfTravel.z * retractSpeed * Time.deltaTime),
                     Space.World);
                 // transform.position = Vector3.MoveTowards(transform.position, grappleGun.transform.position, 4000f * Time.deltaTime);
-
+                player.gameObject.GetComponent<Player>().attachedToRB = false;
+                player.gameObject.GetComponent<Player>().attached = false;
             }
             else
             {
                // retracting = false;
                 rb.isKinematic = true;
-                transform.parent = grappleGun;
-                transform.localPosition = new Vector3(0, 0, 1.5f);
-                transform.localScale = new Vector3(1, 1, 1);
-                //transform.localRotation = Quaternion.identity;
-                transform.localPosition = new Vector3(0, 0, 1.5f);
+               transform.parent = grappleGun;
+              // transform.localPosition = new Vector3(0, -8.2f, 0);
+               // transform.localScale = new Vector3(1, 1, 1);
                 transform.localRotation = Quaternion.identity;
+               // transform.localPosition = new Vector3(0, 0, 1.5f);
+              //  transform.localRotation = Quaternion.identity;
                 Player.launched=(false);
                 retracting = false;
+                
+                
             }
             fireable = true;
+
 
 
         }
