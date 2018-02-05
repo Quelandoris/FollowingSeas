@@ -91,13 +91,13 @@ public class Player : MonoBehaviour {
            // mast.SetActive(sailEnabled);
             if (sailEnabled)
             {
-                Anim.SetBool("FullMast", false);
+                Anim.SetBool("FullMast", true);
                 Anim.Play("FullMast");
                 foldingSpeed = 1;
             }
             else
             {
-                Anim.SetBool("FullMast", true);
+                Anim.SetBool("FullMast", false);
                 Anim.Play("FullMast");
                 foldingSpeed = -1;
             }
