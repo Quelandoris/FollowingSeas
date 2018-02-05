@@ -28,6 +28,8 @@ public class Player : MonoBehaviour {
     public static bool launched;
     public bool attached;
     public HarpoonLauncher harpoonLauncher;
+    public Animator Anim;
+    public float foldingSpeed;
 
     TrackWind windScript;
     bool sailEnabled = false;
@@ -36,6 +38,7 @@ public class Player : MonoBehaviour {
     float scrollSpeed = -75;
     // Use this for initialization
     void Start() {
+        Anim.GetComponent<Animator>();
         windScript = GetComponent<TrackWind>();
         solidLayers = ~(waterLayer | playerLayer | currentLayer);
         myRB = GetComponent<Rigidbody>();
@@ -86,6 +89,14 @@ public class Player : MonoBehaviour {
         {
             sailEnabled = !sailEnabled;
             mast.SetActive(sailEnabled);
+            if (sailEnabled)
+            {
+                foldingSpeed = 1;
+            }
+            else
+            {
+                foldingSpeed = -1;
+            }
         }
 
 
@@ -128,7 +139,10 @@ public class Player : MonoBehaviour {
                 //Animate Mast
                 mast.transform.localRotation = Quaternion.identity;
             }
-
+            Anim.Play("FullMast",-1, 0f);
+        }
+        else
+        {
 
         }
 
@@ -185,7 +199,7 @@ public class Player : MonoBehaviour {
         float compliment = 180f - angle;
         float fraction = compliment / 180f;
         float power = 8f * (fraction * fraction * fraction) - 18f * (fraction * fraction) + 12f * fraction - 1.5f;
-        Debug.Log(power);
+        //Debug.Log(power);
         return Mathf.Max(0, power);
     }
 
