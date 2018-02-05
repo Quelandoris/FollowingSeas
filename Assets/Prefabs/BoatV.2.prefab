@@ -343,6 +343,7 @@ GameObject:
   - component: {fileID: 114973404340433424}
   - component: {fileID: 114692297060289744}
   - component: {fileID: 114851858842489294}
+  - component: {fileID: 95334288810529870}
   m_Layer: 8
   m_Name: BoatV.2
   m_TagString: Player
@@ -563,7 +564,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4276479689203818}
-  - component: {fileID: 95553432049041732}
   m_Layer: 8
   m_Name: boat_v5_rigged
   m_TagString: Untagged
@@ -1418,7 +1418,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1092677642408404}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 7.38591e-17, y: 1, z: -7.38591e-17, w: -7.38591e-17}
   m_LocalPosition: {x: -0.00209, y: -0.000036759375, z: -0.0045974967}
   m_LocalScale: {x: 0.06811996, y: 1.6715187, z: -0.038991276}
   m_Children:
@@ -2281,16 +2281,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!95 &95553432049041732
+--- !u!95 &95334288810529870
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1666458860249152}
+  m_GameObject: {fileID: 1279169204183464}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 3f740d2199568d945a795bba9473bfa0, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b33864c11fbe5064dae1faf95e632c96, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2386,7 +2386,10 @@ MonoBehaviour:
   flag: {fileID: 0}
   attached: 0
   harpoonLauncher: {fileID: 114155659097047390}
+  Anim: {fileID: 95334288810529870}
+  foldingSpeed: 0
   grounded: 0
+  attachedToRB: 0
 --- !u!114 &114851858842489294
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2401,7 +2404,7 @@ MonoBehaviour:
   waterLayer:
     serializedVersion: 2
     m_Bits: 16
-  height: 1.8
+  height: 2
   crossSection: 12
 --- !u!114 &114862722278532940
 MonoBehaviour:
