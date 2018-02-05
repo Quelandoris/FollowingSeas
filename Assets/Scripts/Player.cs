@@ -38,10 +38,10 @@ public class Player : MonoBehaviour {
     float scrollSpeed = -75;
     // Use this for initialization
     void Start() {
-        Anim.GetComponent<Animator>();
+        Anim = GetComponent<Animator>();
         windScript = GetComponent<TrackWind>();
         solidLayers = ~(waterLayer | playerLayer | currentLayer);
-        myRB = GetComponent<Rigidbody>();
+        myRB = GetComponentInParent<Rigidbody>();
     }
 
     // Update is called once per frame
