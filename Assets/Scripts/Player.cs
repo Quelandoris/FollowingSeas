@@ -28,13 +28,17 @@ public class Player : MonoBehaviour {
     public static bool launched;
     public bool attached;
     public HarpoonLauncher harpoonLauncher;
+    public Animator Anim;
+    public float foldingSpeed;
 
     TrackWind windScript;
     bool sailEnabled = false;
     public bool grounded;
+    public bool attachedToRB= false;
     float scrollSpeed = -75;
     // Use this for initialization
     void Start() {
+        Anim.GetComponent<Animator>();
         windScript = GetComponent<TrackWind>();
         solidLayers = ~(waterLayer | playerLayer | currentLayer);
         myRB = GetComponent<Rigidbody>();
@@ -85,6 +89,14 @@ public class Player : MonoBehaviour {
         {
             sailEnabled = !sailEnabled;
             mast.SetActive(sailEnabled);
+            if (sailEnabled)
+            {
+                foldingSpeed = 1;
+            }
+            else
+            {
+                foldingSpeed = -1;
+            }
         }
 
 
@@ -96,13 +108,13 @@ public class Player : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        if (!grounded){
-        myRB.AddForce(Input.GetAxis("Vertical") * throttleSpeed* transform.forward, ForceMode.Acceleration);
-        TurnShip();
-        myRB.AddTorque(Input.GetAxis("Horizontal") * -1 * transform.forward);
-        //myRB.AddTorque(Input.GetAxis("Horizontal") * -0.1f * transform.forward, ForceMode.Impulse);
-        float thrust = Mathf.Max(0, Input.GetAxis("Vertical"));
-         myRB.AddTorque(-0.5f * thrust* transform.right);
+        if (!grounded) {
+            myRB.AddForce(Input.GetAxis("Vertical") * throttleSpeed * transform.forward, ForceMode.Acceleration);
+            TurnShip();
+            myRB.AddTorque(Input.GetAxis("Horizontal") * -1 * transform.forward);
+            //myRB.AddTorque(Input.GetAxis("Horizontal") * -0.1f * transform.forward, ForceMode.Impulse);
+            float thrust = Mathf.Max(0, Input.GetAxis("Vertical"));
+            myRB.AddTorque(-0.5f * thrust * transform.right);
         }
         if (sailEnabled)
         {
@@ -111,8 +123,8 @@ public class Player : MonoBehaviour {
             float power = AngleToSailPower(angle);
             myRB.AddForce(windScript.GetWind().magnitude * power * transform.forward);
 
-            
-            if(windScript.GetWind().magnitude > 0)
+
+            if (windScript.GetWind().magnitude > 0)
             {
                 //Animate Flag
                 flag.transform.LookAt(flag.transform.position + windScript.GetWind());
@@ -127,19 +139,23 @@ public class Player : MonoBehaviour {
                 //Animate Mast
                 mast.transform.localRotation = Quaternion.identity;
             }
-
-            
+            Anim.Play("FullMast",-1, 0f);
         }
-        
-        
+        else
+        {
+
+        }
+
+
         if (attached)
         {
-            
+            if (attachedToRB) { 
             myRB.AddForce((Input.GetAxis("Mouse ScrollWheel") * scrollSpeed) * (hook.transform.position - transform.position).normalized);
         }
+         }
         if (!launched)
         {
-           hook.transform.localPosition = new Vector3(0, 0, 1.5f);
+          // hook.transform.localPosition = new Vector3(0, -8f, 0);
            hook.transform.localRotation = Quaternion.identity;
         }
     }
@@ -183,7 +199,7 @@ public class Player : MonoBehaviour {
         float compliment = 180f - angle;
         float fraction = compliment / 180f;
         float power = 8f * (fraction * fraction * fraction) - 18f * (fraction * fraction) + 12f * fraction - 1.5f;
-        Debug.Log(power);
+        //Debug.Log(power);
         return Mathf.Max(0, power);
     }
 
