@@ -88,13 +88,17 @@ public class Player : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             sailEnabled = !sailEnabled;
-            mast.SetActive(sailEnabled);
+           // mast.SetActive(sailEnabled);
             if (sailEnabled)
             {
+                Anim.SetBool("FullMast", false);
+                Anim.Play("FullMast");
                 foldingSpeed = 1;
             }
             else
             {
+                Anim.SetBool("FullMast", true);
+                Anim.Play("FullMast");
                 foldingSpeed = -1;
             }
         }
@@ -139,7 +143,7 @@ public class Player : MonoBehaviour {
                 //Animate Mast
                 mast.transform.localRotation = Quaternion.identity;
             }
-            Anim.Play("FullMast",-1, 0f);
+           
         }
         else
         {
