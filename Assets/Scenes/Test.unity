@@ -427,6 +427,7 @@ MonoBehaviour:
   flag: {fileID: 0}
   attached: 0
   harpoonLauncher: {fileID: 0}
+  grounded: 0
 --- !u!114 &141873888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4386,9 +4387,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 548e646e4d147ff4f880d27c5a9cd115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  thrust: 2500
+  ropeMax: 100
   player: {fileID: 1308488541}
+  retractSpeed: 60
   rope: {fileID: 1254517028}
   hookCollider: {fileID: 1914840336}
+  fireable: 0
+  grappleGun: {fileID: 0}
 --- !u!54 &981662487
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6087,6 +6093,7 @@ MonoBehaviour:
   flag: {fileID: 126117578}
   attached: 0
   harpoonLauncher: {fileID: 1438374975}
+  grounded: 0
 --- !u!1 &1316615798
 GameObject:
   m_ObjectHideFlags: 0
@@ -7323,9 +7330,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 548e646e4d147ff4f880d27c5a9cd115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  thrust: 2500
+  ropeMax: 100
   player: {fileID: 141873889}
+  retractSpeed: 60
   rope: {fileID: 0}
   hookCollider: {fileID: 1929960785}
+  fireable: 0
+  grappleGun: {fileID: 0}
 --- !u!54 &1564743174
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9783,6 +9795,7 @@ MonoBehaviour:
   flag: {fileID: 0}
   attached: 0
   harpoonLauncher: {fileID: 1438374975}
+  grounded: 0
 --- !u!114 &1997290153
 MonoBehaviour:
   m_ObjectHideFlags: 0
