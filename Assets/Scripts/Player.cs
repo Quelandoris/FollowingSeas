@@ -38,10 +38,10 @@ public class Player : MonoBehaviour {
     float scrollSpeed = -75;
     // Use this for initialization
     void Start() {
-        Anim.GetComponent<Animator>();
+        Anim = GetComponent<Animator>();
         windScript = GetComponent<TrackWind>();
         solidLayers = ~(waterLayer | playerLayer | currentLayer);
-        myRB = GetComponent<Rigidbody>();
+        myRB = GetComponentInParent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -88,13 +88,17 @@ public class Player : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             sailEnabled = !sailEnabled;
-            mast.SetActive(sailEnabled);
+           // mast.SetActive(sailEnabled);
             if (sailEnabled)
             {
+                Anim.SetBool("FullMast", true);
+                Anim.Play("FullMast");
                 foldingSpeed = 1;
             }
             else
             {
+                Anim.SetBool("FullMast", false);
+                Anim.Play("FullMast");
                 foldingSpeed = -1;
             }
         }
@@ -139,7 +143,7 @@ public class Player : MonoBehaviour {
                 //Animate Mast
                 mast.transform.localRotation = Quaternion.identity;
             }
-            Anim.Play("FullMast",-1, 0f);
+           
         }
         else
         {
