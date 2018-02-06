@@ -91,12 +91,14 @@ public class Player : MonoBehaviour {
            // mast.SetActive(sailEnabled);
             if (sailEnabled)
             {
+                GetComponent<WindPush>().enabled = true;
                 Anim.SetBool("FullMast", true);
                 Anim.Play("FullMast");
                 foldingSpeed = 1;
             }
             else
             {
+                GetComponent<WindPush>().enabled = false;
                 Anim.SetBool("FullMast", false);
                 Anim.Play("FullMast");
                 foldingSpeed = -1;

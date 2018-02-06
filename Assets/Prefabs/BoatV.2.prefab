@@ -391,6 +391,7 @@ GameObject:
   - component: {fileID: 114692297060289744}
   - component: {fileID: 114851858842489294}
   - component: {fileID: 95334288810529870}
+  - component: {fileID: 114740589461685508}
   - component: {fileID: 114094006281219950}
   m_Layer: 8
   m_Name: BoatV.2
@@ -1468,7 +1469,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1279169204183464}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 154.62997, y: 5, z: -12.8207655}
+  m_LocalPosition: {x: 144.95016, y: 5, z: 16.512915}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4276479689203818}
@@ -2543,6 +2544,17 @@ MonoBehaviour:
   foldingSpeed: 0
   grounded: 0
   attachedToRB: 0
+--- !u!114 &114740589461685508
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1279169204183464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbb579afa4f264941a5b49ea89757403, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114851858842489294
 MonoBehaviour:
   m_ObjectHideFlags: 1
