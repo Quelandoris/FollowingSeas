@@ -24,7 +24,7 @@ public class Spawner : Toggleable {
         primary = true;
         if (primaryObject != null)
         {
-            GameObject newObj = Instantiate(primaryObject);
+            GameObject newObj = Instantiate(primaryObject, primaryObject.transform.parent);
             newObj.SetActive(true);
         }
     }
@@ -34,7 +34,7 @@ public class Spawner : Toggleable {
         primary = false;
         if(secondaryObject != null)
         {
-            GameObject newObj = Instantiate(secondaryObject);
+            GameObject newObj = Instantiate(secondaryObject, secondaryObject.transform.parent);
             newObj.SetActive(true);
         }
     }
