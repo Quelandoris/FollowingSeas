@@ -8,6 +8,13 @@ public class MovingObject : Toggleable {
     float remainingTime = 0;
     public float duration;
 
+    private void Start()
+    {
+        if(duration == 0)
+        {
+            this.enabled = false;
+        }
+    }
 
     private void FixedUpdate()
     {
@@ -15,7 +22,9 @@ public class MovingObject : Toggleable {
 
         if (primary)
         {
-            transform.localPosition = Vector3.Lerp(primaryPosition, secondaryPosition, remainingTime / duration);
+            Vector3 targetPosition = Vector3.Lerp(primaryPosition, secondaryPosition, remainingTime / duration);
+            Debug.Log(targetPosition);
+            transform.localPosition = targetPosition;
         }
         else
         {
