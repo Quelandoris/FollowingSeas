@@ -4416,6 +4416,7 @@ MonoBehaviour:
   hookCollider: {fileID: 981662488}
   fireable: 0
   grappleGun: {fileID: 1959936151}
+  ropeDistance: 0
 --- !u!54 &981662487
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5087,6 +5088,26 @@ Prefab:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 4300006, guid: 3f740d2199568d945a795bba9473bfa0, type: 3}
+    - target: {fileID: 114370952131412360, guid: 11e6bc88566239544bd5841a89209994,
+        type: 2}
+      propertyPath: thrust
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 54763396298519636, guid: 11e6bc88566239544bd5841a89209994,
+        type: 2}
+      propertyPath: m_Mass
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 54763396298519636, guid: 11e6bc88566239544bd5841a89209994,
+        type: 2}
+      propertyPath: m_CollisionDetection
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114370952131412360, guid: 11e6bc88566239544bd5841a89209994,
+        type: 2}
+      propertyPath: ropeMax
+      value: 200
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 11e6bc88566239544bd5841a89209994, type: 2}
   m_IsPrefabParent: 0
@@ -7391,6 +7412,7 @@ MonoBehaviour:
   hookCollider: {fileID: 1929960785}
   fireable: 0
   grappleGun: {fileID: 0}
+  ropeDistance: 0
 --- !u!54 &1564743174
 Rigidbody:
   m_ObjectHideFlags: 0
