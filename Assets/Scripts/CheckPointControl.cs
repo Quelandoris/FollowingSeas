@@ -10,7 +10,7 @@ public class CheckPointControl : MonoBehaviour {
     /// This script can only hold 5 spawn points
     /// </summary>
 	void Update () {
-        if (Input.GetKeyDown(KeyCode.Alpha1)&& Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             try
             {
@@ -22,7 +22,7 @@ public class CheckPointControl : MonoBehaviour {
             }
          
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2) && Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             try
             {
@@ -33,7 +33,7 @@ public class CheckPointControl : MonoBehaviour {
             Debug.Log("You have not made a checkpoint 2");
             }
     }
-        if (Input.GetKeyDown(KeyCode.Alpha3) && Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             try
             {
@@ -44,7 +44,7 @@ public class CheckPointControl : MonoBehaviour {
                 Debug.Log("You have not made a checkpoint 3");
             }
         }
-        if (Input.GetKeyDown(KeyCode.Alpha4) && Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             try
             {
@@ -55,7 +55,7 @@ public class CheckPointControl : MonoBehaviour {
                 Debug.Log("You have not made a checkpoint 4");
             }
         }
-        if (Input.GetKeyDown(KeyCode.Alpha5) && Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.Alpha5))
         {
             try
             {
