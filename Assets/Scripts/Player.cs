@@ -8,7 +8,7 @@ public class Player : MonoBehaviour {
     Rigidbody myRB;
     public float throttleSpeed = 7;
     public float rotateSpeed = 1.2f;
-    public static float grappleStrength = 8;
+    public static float grappleStrength = 10;
 
 
     public LayerMask waterLayer;
@@ -147,18 +147,26 @@ public class Player : MonoBehaviour {
             }
            
         }
-        else
+        if (Input.GetKey(KeyCode.Q))
         {
-
+            grappleStrength = grappleStrength + .2f;
+        }
+        if (Input.GetKey(KeyCode.E))
+        {
+            grappleStrength = grappleStrength - .2f;
         }
 
 
-        if (attached)
+        if (attached)//what happens if you are attached to a stationary
         {
-            if (attachedToRB) { 
+            myRB.AddForce(grappleStrength* (hook.transform.position - transform.position).normalized);
+            
+        }
+        if (attachedToRB)
+        {
+            //when you are connected to a moving object
             myRB.AddForce((Input.GetAxis("Mouse ScrollWheel") * scrollSpeed) * (hook.transform.position - transform.position).normalized);
         }
-         }
         if (!launched)
         {
           // hook.transform.localPosition = new Vector3(0, -8f, 0);
