@@ -5,6 +5,7 @@ using UnityEngine;
 public class Grapple : MonoBehaviour {
     public float thrust = 2500;
     public float ropeMax = 100f;
+    public float ropeLength = 0f;
     float scrollSpeed = 500;
     public Rigidbody player;
     public float retractSpeed = 60;
@@ -18,12 +19,14 @@ public class Grapple : MonoBehaviour {
     public Transform grappleGun;
     Rigidbody rb;
     private Transform anchor;
-    public float ropeDistance;
+    public float ropeDistanceMax;
+    public float ropeConnectionMax;
     
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         fireable = true;
+
     }
     private void Update()
     {
@@ -35,7 +38,7 @@ public class Grapple : MonoBehaviour {
     }
     void FixedUpdate()
     {
-        float ropeLength = Vector3.Distance(gameObject.transform.position, player.transform.position);//ropeLength
+       ropeLength = Vector3.Distance(gameObject.transform.position, player.transform.position);//ropeLength
         
         if (ropeLength >= ropeMax)
         {
@@ -54,9 +57,9 @@ public class Grapple : MonoBehaviour {
         if (attachedRB != null)
         {
             
-            if (ropeDistance < ropeLength)
+            if (ropeDistanceMax < ropeLength)
             {
-                //attachedRB.AddForceAtPosition((rope.position - transform.position).normalized, transform.position);
+                attachedRB.AddForceAtPosition((rope.position - transform.position).normalized*100, transform.position);
             }
             // += Input.GetAxis("Mouse ScrollWheel") * scrollSpeed;
             attachedRB.AddForceAtPosition((Input.GetAxis("Mouse ScrollWheel") * -scrollSpeed) * (rope.position - transform.position).normalized, transform.position);
@@ -66,11 +69,11 @@ public class Grapple : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
-
+        
         fireable = true;
         if (active)
         {
-            ropeDistance = Vector3.Distance(gameObject.transform.position, player.transform.position);
+            ropeDistanceMax = Vector3.Distance(gameObject.transform.position, player.transform.position);
             anchor = new GameObject("Grapple_Anchor").transform;
             anchor.transform.position = this.transform.position;
             anchor.transform.rotation = this.transform.rotation;
