@@ -169,7 +169,8 @@ public class Player : MonoBehaviour {
                 }
                 if (reeling)
                    {
-                      myRB.AddForce(grappleStrength * (hook.transform.position - transform.position).normalized);
+                      Vector3 direction = hook.transform.position - transform.position;
+                      myRB.AddForce(grappleStrength * new Vector3(direction.x, 0, direction.z).normalized);
                    }
                 }
                 if (attachedToRB)
