@@ -9,7 +9,7 @@ public class OneShotTimer : Toggleable {
     public Actions actionType;
     public float duration;
     float progress = 0;
-    public bool interruptable;
+    public bool interruptible;
 
     // Update is called once per frame
     void Update()
@@ -45,7 +45,7 @@ public class OneShotTimer : Toggleable {
     //Start Timer
     public override void Secondary()
     {
-        if(primary || interruptable)
+        if(primary || interruptible)
         {
             primary = false;
             progress = 0;
