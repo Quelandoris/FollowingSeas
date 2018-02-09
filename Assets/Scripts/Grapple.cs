@@ -5,7 +5,8 @@ using UnityEngine;
 public class Grapple : MonoBehaviour {
     public float thrust = 2500;
     public float ropeMax = 100f;
-    float scrollSpeed = 75;
+    public float ropeLength = 0f;
+    float scrollSpeed = 500;
     public Rigidbody player;
     public float retractSpeed = 60;
     Transform hook;
@@ -18,10 +19,14 @@ public class Grapple : MonoBehaviour {
     public Transform grappleGun;
     Rigidbody rb;
     private Transform anchor;
+    public float ropeDistanceMax;
+    public float ropeConnectionMax;
+    
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         fireable = true;
+
     }
     private void Update()
     {
@@ -33,7 +38,7 @@ public class Grapple : MonoBehaviour {
     }
     void FixedUpdate()
     {
-        float ropeLength = Vector3.Distance(gameObject.transform.position, player.transform.position);//ropeLength
+       ropeLength = Vector3.Distance(gameObject.transform.position, player.transform.position);//ropeLength
         
         if (ropeLength >= ropeMax)
         {
@@ -51,6 +56,11 @@ public class Grapple : MonoBehaviour {
         }
         if (attachedRB != null)
         {
+            
+            if (ropeDistanceMax < ropeLength)
+            {
+                attachedRB.AddForceAtPosition((rope.position - transform.position).normalized*(ropeLength-ropeDistanceMax)*100, transform.position);
+            }
             // += Input.GetAxis("Mouse ScrollWheel") * scrollSpeed;
             attachedRB.AddForceAtPosition((Input.GetAxis("Mouse ScrollWheel") * -scrollSpeed) * (rope.position - transform.position).normalized, transform.position);
         }
@@ -59,11 +69,11 @@ public class Grapple : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
-
+        
         fireable = true;
         if (active)
         {
-           
+            ropeDistanceMax = Vector3.Distance(gameObject.transform.position, player.transform.position);
             anchor = new GameObject("Grapple_Anchor").transform;
             anchor.transform.position = this.transform.position;
             anchor.transform.rotation = this.transform.rotation;
@@ -76,12 +86,17 @@ public class Grapple : MonoBehaviour {
                // return;
             }
             Deactivate();
-            player.gameObject.GetComponent<Player>().attached = true;
+            
 
-            attachedRB = collision.gameObject.GetComponentInParent<Rigidbody>();
-            if (collision.gameObject.GetComponent<Rigidbody>() == null)
+            
+            if (collision.gameObject.GetComponent<Rigidbody>() != null)
             {
+                attachedRB = collision.gameObject.GetComponentInParent<Rigidbody>();
                 player.gameObject.GetComponent<Player>().attachedToRB = true;
+            }
+            else
+            {
+                player.gameObject.GetComponent<Player>().attached = true;
             }
         }
 
@@ -160,7 +175,7 @@ public class Grapple : MonoBehaviour {
               // transform.localPosition = new Vector3(0, -8.2f, 0);
                // transform.localScale = new Vector3(1, 1, 1);
                 transform.localRotation = Quaternion.identity;
-               // transform.localPosition = new Vector3(0, 0, 1.5f);
+                transform.localPosition = new Vector3(0.003f, -8.165392e-06f, -0.0003082038f);
               //  transform.localRotation = Quaternion.identity;
                 Player.launched=(false);
                 retracting = false;
