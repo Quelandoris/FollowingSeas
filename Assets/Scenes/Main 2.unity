@@ -378,6 +378,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   throttleSpeed: 7
   rotateSpeed: 0.5
+  grappleStrength: 10
   waterLayer:
     serializedVersion: 2
     m_Bits: 16
@@ -5080,7 +5081,7 @@ Prefab:
     - target: {fileID: 114470815737763650, guid: 6ca7aa433fd495649aeb6f5d3ffbcd81,
         type: 2}
       propertyPath: force
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6ca7aa433fd495649aeb6f5d3ffbcd81, type: 2}
@@ -5226,7 +5227,7 @@ Prefab:
     - target: {fileID: 114470815737763650, guid: 6ca7aa433fd495649aeb6f5d3ffbcd81,
         type: 2}
       propertyPath: force
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6ca7aa433fd495649aeb6f5d3ffbcd81, type: 2}
@@ -5461,7 +5462,7 @@ Prefab:
     - target: {fileID: 114470815737763650, guid: 6ca7aa433fd495649aeb6f5d3ffbcd81,
         type: 2}
       propertyPath: force
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6ca7aa433fd495649aeb6f5d3ffbcd81, type: 2}
@@ -7425,7 +7426,7 @@ Prefab:
     - target: {fileID: 114470815737763650, guid: 6ca7aa433fd495649aeb6f5d3ffbcd81,
         type: 2}
       propertyPath: force
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6ca7aa433fd495649aeb6f5d3ffbcd81, type: 2}
@@ -8248,7 +8249,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4822485872022554, guid: 11e6bc88566239544bd5841a89209994, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 16.512915
+      value: -11.3
       objectReference: {fileID: 0}
     - target: {fileID: 4822485872022554, guid: 11e6bc88566239544bd5841a89209994, type: 2}
       propertyPath: m_LocalRotation.x
@@ -8295,6 +8296,20 @@ Prefab:
       propertyPath: rope
       value: 
       objectReference: {fileID: 328384}
+    - target: {fileID: 114692297060289744, guid: 11e6bc88566239544bd5841a89209994,
+        type: 2}
+      propertyPath: grappleStrength
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4969861922403124, guid: 11e6bc88566239544bd5841a89209994, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.0018
+      objectReference: {fileID: 0}
+    - target: {fileID: 54525936299000106, guid: 11e6bc88566239544bd5841a89209994,
+        type: 2}
+      propertyPath: m_AngularDrag
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 11e6bc88566239544bd5841a89209994, type: 2}
   m_IsPrefabParent: 0
@@ -8969,6 +8984,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thrust: 2500
   ropeMax: 100
+  ropeLength: 0
   player: {fileID: 141873889}
   retractSpeed: 60
   rope: {fileID: 0}
@@ -11063,6 +11079,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   throttleSpeed: 7
   rotateSpeed: 0.5
+  grappleStrength: 10
   waterLayer:
     serializedVersion: 2
     m_Bits: 16
