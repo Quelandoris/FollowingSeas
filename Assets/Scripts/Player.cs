@@ -160,16 +160,17 @@ public class Player : MonoBehaviour {
         {
             grappleStrength = grappleStrength - .2f;
         }
+        Vector3 direction = hook.transform.position - transform.position;
         Mathf.Clamp(grappleStrength, -10, 10);
                 if (attached)//what happens if you are attached to a stationary
                 {
                 if (hook.GetComponent<Grapple>().ropeDistanceMax < hook.GetComponent<Grapple>().ropeLength)//prevents player from extending past distnace
                 {
-                    myRB.AddForce((hook.transform.position - transform.position).normalized*(hook.GetComponent<Grapple>().ropeLength - hook.GetComponent<Grapple>().ropeDistanceMax) * 75);
+                    myRB.AddForce(new Vector3(direction.x, 0, direction.z).normalized * (hook.GetComponent<Grapple>().ropeLength - hook.GetComponent<Grapple>().ropeDistanceMax) * 75);
                 }
                 if (reeling)
                    {
-                      Vector3 direction = hook.transform.position - transform.position;
+                      
                       myRB.AddForce(grappleStrength * new Vector3(direction.x, 0, direction.z).normalized);
                    }
                 }
