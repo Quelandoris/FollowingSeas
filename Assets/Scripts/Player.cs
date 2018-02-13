@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 
 [RequireComponent(typeof(Rigidbody), typeof(TrackWind))]
@@ -51,7 +50,7 @@ public class Player : MonoBehaviour {
     void Update() {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            SceneManager.LoadScene(0);
+            Application.Quit();
         }
         RaycastHit mouseHit;
         Vector3 lookTarget;
