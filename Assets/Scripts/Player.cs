@@ -36,7 +36,7 @@ public class Player : MonoBehaviour {
     public bool grounded;
     public bool attachedToRB = false;
     float scrollSpeed = -75;
-    bool reeling = false;
+    bool reeling = true;
     // Use this for initialization
     void Start() {
         Anim = GetComponent<Animator>();
