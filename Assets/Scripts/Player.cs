@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 [RequireComponent(typeof(Rigidbody), typeof(TrackWind))]
@@ -50,7 +51,7 @@ public class Player : MonoBehaviour {
     void Update() {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Application.Quit();
+            SceneManager.LoadScene(0);
         }
         RaycastHit mouseHit;
         Vector3 lookTarget;
@@ -155,13 +156,22 @@ public class Player : MonoBehaviour {
         if (Input.GetKey(KeyCode.Q))
         {
             grappleStrength = grappleStrength + .2f;
+            grappleStrength = Mathf.Clamp(grappleStrength, 2f, 10f);
+        
         }
         if (Input.GetKey(KeyCode.E))
         {
             grappleStrength = grappleStrength - .2f;
+            grappleStrength = Mathf.Clamp(grappleStrength, 2f, 10f);
         }
-        Vector3 direction = hook.transform.position - transform.position;
-        Mathf.Clamp(grappleStrength, -10, 10);
+        if (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Q))
+        {
+            grappleStrength = 10;
+        }
+
+
+            Vector3 direction = hook.transform.position - transform.position;
+      //  Mathf.Clamp(grappleStrength, -10, 10);
                 if (attached)//what happens if you are attached to a stationary
                 {
                 if (hook.GetComponent<Grapple>().ropeDistanceMax < hook.GetComponent<Grapple>().ropeLength)//prevents player from extending past distnace
@@ -181,7 +191,8 @@ public class Player : MonoBehaviour {
                 //when you are connected to a moving object
                 // myRB.AddForce(grappleStrength * (hook.transform.position - transform.position).normalized);
                 myRB.AddForce((Input.GetAxis("Mouse ScrollWheel") * scrollSpeed) * (hook.transform.position - transform.position).normalized);
-                }
+               
+            }
             }
             if (!launched)
             {
@@ -195,11 +206,16 @@ public class Player : MonoBehaviour {
             {
                 grounded = true;
             }
-            else
-            {
-                grounded = false;
-            }
+            
+       
         }
+           void OnCollisionExit(Collision collision)
+          {
+              if (collision.gameObject.CompareTag("Ground"))
+             {
+                 grounded = false;
+              }
+          }
 
         void Fire()
         {

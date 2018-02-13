@@ -197,7 +197,6 @@ GameObject:
   - component: {fileID: 4856295054697472}
   - component: {fileID: 33278399335412458}
   - component: {fileID: 23100973390475782}
-  - component: {fileID: 54495747007869814}
   m_Layer: 8
   m_Name: crossbow_grap_PROXY
   m_TagString: Untagged
@@ -1329,13 +1328,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1041493017887536}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -0, y: 0.00414661, z: 0}
   m_LocalScale: {x: 1.0218499, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4346828072843134}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!4 &4720186030511840
 Transform:
   m_ObjectHideFlags: 1
@@ -1470,7 +1469,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1279169204183464}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 144.95016, y: 5, z: -11.3}
+  m_LocalPosition: {x: 144.95016, y: 5.25, z: -11.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4276479689203818}
@@ -2213,7 +2212,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1041493017887536}
-  m_Mesh: {fileID: 4300000, guid: 3f740d2199568d945a795bba9473bfa0, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 566f57f5480f08d4ba599fc4e58ef72b, type: 3}
 --- !u!33 &33198685248414524
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -2333,21 +2332,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1839329273442962}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54495747007869814
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1092119107951844}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!54 &54525936299000106
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -2534,7 +2518,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   throttleSpeed: 10
   rotateSpeed: 0.5
-  grappleStrength: 7.5
+  grappleStrength: 10
   waterLayer:
     serializedVersion: 2
     m_Bits: 16
