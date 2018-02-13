@@ -189,8 +189,9 @@ public class Player : MonoBehaviour {
                 hook.transform.localRotation = Quaternion.identity;
             }
         }
-        void OnCollisionEnter(Collision collision)
-        {
+    void OnCollisionEnter(Collision collision)
+    {
+        
             if (collision.gameObject.CompareTag("Ground"))
             {
                 grounded = true;
@@ -199,7 +200,11 @@ public class Player : MonoBehaviour {
             {
                 grounded = false;
             }
+        
+       
         }
+        
+        
 
         void Fire()
         {
