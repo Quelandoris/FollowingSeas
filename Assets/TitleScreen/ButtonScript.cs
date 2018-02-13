@@ -17,8 +17,9 @@ public class ButtonScript : MonoBehaviour {
 	public void GameClose () {
 		Application.Quit ();
 	}
-    public void Start()
+    public void Update()
     {
+        Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
 }
