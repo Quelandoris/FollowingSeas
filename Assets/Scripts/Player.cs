@@ -49,14 +49,15 @@ public class Player : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetKeyDown(KeyCode.Escape))
+       /* if (Input.GetKeyDown(KeyCode.Escape))
         {
             Application.Quit();
-        }
-        if (Input.GetKeyDown(KeyCode.BackQuote))
+        }*/
+        if (Input.GetKeyDown(KeyCode.Escape)&& !Application.isEditor)
         {
             SceneManager.LoadScene(0);
         }
+        
         RaycastHit mouseHit;
         Vector3 lookTarget;
         if (Physics.Raycast(new Ray(Camera.main.transform.position, Camera.main.transform.forward), out mouseHit, 100000, solidLayers))
