@@ -160,6 +160,8 @@ public class Player : MonoBehaviour {
         {
             grappleStrength = grappleStrength - .2f;
         }
+
+
         Vector3 direction = hook.transform.position - transform.position;
         Mathf.Clamp(grappleStrength, -10, 10);
                 if (attached)//what happens if you are attached to a stationary
@@ -181,7 +183,8 @@ public class Player : MonoBehaviour {
                 //when you are connected to a moving object
                 // myRB.AddForce(grappleStrength * (hook.transform.position - transform.position).normalized);
                 myRB.AddForce((Input.GetAxis("Mouse ScrollWheel") * scrollSpeed) * (hook.transform.position - transform.position).normalized);
-                }
+               
+            }
             }
             if (!launched)
             {
