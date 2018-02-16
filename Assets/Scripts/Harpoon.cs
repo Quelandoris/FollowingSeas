@@ -7,11 +7,13 @@ public class Harpoon : MonoBehaviour
     Rigidbody rb;
     public float thrust = 500;
     private Transform anchor;
+    public Collider psycicsCollider;
     //private bool haveJoint = false;
 
 
     void Start()
     {
+        
         rb = GetComponent<Rigidbody>();
         rb.AddForce(transform.forward * thrust);
     }
@@ -54,6 +56,8 @@ public class Harpoon : MonoBehaviour
     {
         rb.constraints = RigidbodyConstraints.FreezeAll;
         rb.detectCollisions = false;
+        rb.isKinematic = true;
+       // psycicsCollider.enabled= false;
         
 
         if (hit.CompareTag("Harpoon"))
