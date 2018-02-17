@@ -618,7 +618,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1922923100584142}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 139.82007, y: 5, z: -0.4807701}
+  m_LocalPosition: {x: 92.87059, y: 44.96176, z: 668.26434}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4397088564321124}
@@ -1164,12 +1164,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thrust: 5000
   ropeMax: 100
+  ropeLength: 0
   player: {fileID: 54532132841941852}
   retractSpeed: 150
   rope: {fileID: 4352169783335240}
   hookCollider: {fileID: 64174215259120564}
   fireable: 0
   grappleGun: {fileID: 4887511872674854}
+  ropeDistanceMax: 0
+  ropeConnectionMax: 0
 --- !u!114 &114081871377089772
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1258,6 +1261,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   throttleSpeed: 10
   rotateSpeed: 0.5
+  grappleStrength: 10
   waterLayer:
     serializedVersion: 2
     m_Bits: 16
@@ -1283,7 +1287,10 @@ MonoBehaviour:
   flag: {fileID: 1048751845743248}
   attached: 0
   harpoonLauncher: {fileID: 114118657191747348}
+  Anim: {fileID: 0}
+  foldingSpeed: 0
   grounded: 0
+  attachedToRB: 0
 --- !u!136 &136810334318808610
 CapsuleCollider:
   m_ObjectHideFlags: 1

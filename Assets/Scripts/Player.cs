@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 [RequireComponent(typeof(Rigidbody), typeof(TrackWind))]
@@ -48,13 +49,18 @@ public class Player : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetKeyDown(KeyCode.Escape))
+       /* if (Input.GetKeyDown(KeyCode.Escape))
         {
             Application.Quit();
+        }*/
+        if (Input.GetKeyDown(KeyCode.Escape)&& !Application.isEditor)
+        {
+            SceneManager.LoadScene(0);
         }
+        
         RaycastHit mouseHit;
         Vector3 lookTarget;
-        if (Physics.Raycast(new Ray(Camera.main.transform.position, Camera.main.transform.forward), out mouseHit, 100000, solidLayers))
+        if (Physics.Raycast(new Ray(transform.Find("Camera follow").position, Camera.main.transform.forward), out mouseHit, 100000, solidLayers))
         {
             lookTarget = mouseHit.point;
         }
@@ -127,6 +133,16 @@ public class Player : MonoBehaviour {
             float thrust = Mathf.Max(0, Input.GetAxis("Vertical"));
             myRB.AddTorque(-0.5f * thrust * transform.right);
         }
+        if (windScript.GetWind().magnitude > 0)
+        {
+            //Animate Flag
+            flag.transform.LookAt(flag.transform.position + windScript.GetWind());
+        }
+        else
+        {
+            //Animate Flag
+            flag.transform.LookAt(transform.position - 2 * transform.forward);
+        }
         if (sailEnabled)
         {
             Vector3 playerForward = TrackWind.MakeHorizontal(transform.forward);
@@ -137,16 +153,12 @@ public class Player : MonoBehaviour {
 
             if (windScript.GetWind().magnitude > 0)
             {
-                //Animate Flag
-                flag.transform.LookAt(flag.transform.position + windScript.GetWind());
                 //Animate Mast
                 int side = Vector3.Cross(windScript.GetWind(), playerForward).y > 0 ? 1 : -1;
                 mast.transform.localRotation = Quaternion.Euler(0, side * (180 - angle) / 2, 0);
             }
             else
             {
-                //Animate Flag
-                flag.transform.LookAt(transform.position - 2 * transform.forward);
                 //Animate Mast
                 mast.transform.localRotation = Quaternion.identity;
             }
@@ -155,13 +167,22 @@ public class Player : MonoBehaviour {
         if (Input.GetKey(KeyCode.Q))
         {
             grappleStrength = grappleStrength + .2f;
+            grappleStrength = Mathf.Clamp(grappleStrength, 2f, 10f);
+        
         }
         if (Input.GetKey(KeyCode.E))
         {
             grappleStrength = grappleStrength - .2f;
+            grappleStrength = Mathf.Clamp(grappleStrength, 2f, 10f);
         }
-        Vector3 direction = hook.transform.position - transform.position;
-        Mathf.Clamp(grappleStrength, -10, 10);
+        if (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Q))
+        {
+            grappleStrength = 10;
+        }
+
+
+            Vector3 direction = hook.transform.position - transform.position;
+      //  Mathf.Clamp(grappleStrength, -10, 10);
                 if (attached)//what happens if you are attached to a stationary
                 {
                 if (hook.GetComponent<Grapple>().ropeDistanceMax < hook.GetComponent<Grapple>().ropeLength)//prevents player from extending past distnace
@@ -181,7 +202,8 @@ public class Player : MonoBehaviour {
                 //when you are connected to a moving object
                 // myRB.AddForce(grappleStrength * (hook.transform.position - transform.position).normalized);
                 myRB.AddForce((Input.GetAxis("Mouse ScrollWheel") * scrollSpeed) * (hook.transform.position - transform.position).normalized);
-                }
+               
+            }
             }
             if (!launched)
             {
@@ -195,11 +217,16 @@ public class Player : MonoBehaviour {
             {
                 grounded = true;
             }
-            else
-            {
-                grounded = false;
-            }
+            
+       
         }
+           void OnCollisionExit(Collision collision)
+          {
+              if (collision.gameObject.CompareTag("Ground"))
+             {
+                 grounded = false;
+              }
+          }
 
         void Fire()
         {
