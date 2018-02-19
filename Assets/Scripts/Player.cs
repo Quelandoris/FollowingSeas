@@ -52,13 +52,12 @@ public class Player : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Application.Quit();
-<<<<<<< HEAD
-=======
+
         }
         if (Input.GetKeyDown(KeyCode.BackQuote))
         {
             SceneManager.LoadScene(0);
->>>>>>> parent of 066c025... improved title screen
+
         }
         if (Input.GetKeyDown(KeyCode.BackQuote))
         {

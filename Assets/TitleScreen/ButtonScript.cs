@@ -17,15 +17,11 @@ public class ButtonScript : MonoBehaviour {
 	public void GameClose () {
 		Application.Quit ();
 	}
-<<<<<<< HEAD
-<<<<<<< HEAD
-    public void Start()
-=======
+
+    
+   
     public void Awake()
->>>>>>> parent of 066c025... improved title screen
-=======
-    public void Awake()
->>>>>>> parent of 0b12ee5... Revert "beat the bug of the title screen!"
+
     {
         Cursor.visible = true;
     }
