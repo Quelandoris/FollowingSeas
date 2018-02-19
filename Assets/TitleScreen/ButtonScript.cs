@@ -17,7 +17,7 @@ public class ButtonScript : MonoBehaviour {
 	public void GameClose () {
 		Application.Quit ();
 	}
-    public void Awake()
+    public void Start()
     {
         Cursor.visible = true;
     }
