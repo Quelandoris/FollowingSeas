@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 [RequireComponent(typeof(Rigidbody), typeof(TrackWind))]
@@ -58,6 +59,10 @@ public class Player : MonoBehaviour {
         {
             SceneManager.LoadScene(0);
 >>>>>>> parent of 066c025... improved title screen
+        }
+        if (Input.GetKeyDown(KeyCode.BackQuote))
+        {
+            SceneManager.LoadScene(0);
         }
         RaycastHit mouseHit;
         Vector3 lookTarget;
