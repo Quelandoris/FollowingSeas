@@ -17,7 +17,11 @@ public class ButtonScript : MonoBehaviour {
 	public void GameClose () {
 		Application.Quit ();
 	}
+<<<<<<< HEAD
     public void Start()
+=======
+    public void Awake()
+>>>>>>> parent of 066c025... improved title screen
     {
         Cursor.visible = true;
     }
