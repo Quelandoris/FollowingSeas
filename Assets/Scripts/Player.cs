@@ -49,17 +49,7 @@ public class Player : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Application.Quit();
-
-        }
-        if (Input.GetKeyDown(KeyCode.BackQuote))
-        {
-            SceneManager.LoadScene(0);
-
-        }
-        if (Input.GetKeyDown(KeyCode.BackQuote))
+        if (Input.GetKeyDown(KeyCode.Escape) && !Application.isEditor)
         {
             SceneManager.LoadScene(0);
         }
