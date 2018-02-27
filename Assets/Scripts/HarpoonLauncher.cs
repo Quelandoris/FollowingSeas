@@ -9,13 +9,10 @@ public class HarpoonLauncher : MonoBehaviour {
     public float timeBetweenShots = 0.5f;
     private float shotCounter;
     public Transform firePoint;
-     AudioSource source;
-    public AudioClip clip;
+     
+    //public AudioClip clip;
 
-    public void Start()
-    {
-        source.GetComponent<AudioSource>();
-    }
+   
 
     public void Update ()
     {
@@ -26,7 +23,7 @@ public class HarpoonLauncher : MonoBehaviour {
             {
                 shotCounter = timeBetweenShots;
                 Instantiate(harpoon, firePoint.position, (firePoint.rotation));
-                source.PlayOneShot(clip,1f);
+                
                 gameObject.GetComponentInParent<Rigidbody>().AddForceAtPosition(-1 * transform.up, transform.position, ForceMode.Impulse);//this is our recoil
             }
             
