@@ -40,7 +40,7 @@ public class Player : MonoBehaviour {
     bool reeling = true;
     // Use this for initialization
     void Start() {
-        Anim = GetComponent<Animator>();
+        //Anim = GetComponent<Animator>();
         windScript = GetComponent<TrackWind>();
         solidLayers = ~(waterLayer | playerLayer | currentLayer);
         myRB = GetComponentInParent<Rigidbody>();
