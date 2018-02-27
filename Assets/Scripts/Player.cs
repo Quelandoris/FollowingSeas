@@ -49,9 +49,13 @@ public class Player : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+
         if (Input.GetKeyDown(KeyCode.Escape) && !Application.isEditor)
         {
             SceneManager.LoadScene(0);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
         }
         RaycastHit mouseHit;
         Vector3 lookTarget;
