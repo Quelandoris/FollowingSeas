@@ -200,7 +200,7 @@ public class Player : MonoBehaviour {
             {
                 //when you are connected to a moving object
                 // myRB.AddForce(grappleStrength * (hook.transform.position - transform.position).normalized);
-                myRB.AddForce((Input.GetAxis("Mouse ScrollWheel") * scrollSpeed) * (hook.transform.position - transform.position).normalized);
+                myRB.AddForce((Input.GetAxis("Mouse ScrollWheel") * scrollSpeed) * new Vector3(direction.x, 0, direction.z).normalized);
                
             }
             }
