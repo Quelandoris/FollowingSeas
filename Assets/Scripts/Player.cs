@@ -18,6 +18,7 @@ public class Player : MonoBehaviour {
     public LayerMask grappleLayer;
     public LayerMask harpoonLayer;
     public LayerMask defaultLayer;
+    public LayerMask invisLayer;
 
     LayerMask solidLayers;
 
@@ -42,7 +43,7 @@ public class Player : MonoBehaviour {
     void Start() {
         //Anim = GetComponent<Animator>();
         windScript = GetComponent<TrackWind>();
-        solidLayers = ~(waterLayer | playerLayer | currentLayer);
+        solidLayers = ~(waterLayer | playerLayer | currentLayer | invisLayer);
         myRB = GetComponentInParent<Rigidbody>();
         
     }
