@@ -8,12 +8,17 @@ public class Harpoon : MonoBehaviour
     public float thrust = 500;
     private Transform anchor;
     public Collider psycicsCollider;
+    AudioSource source;
+    public AudioClip grappleclip;
+    public AudioClip destroyclip;
+    MeshRenderer meshRenderer;
     //private bool haveJoint = false;
 
 
     void Start()
     {
-        
+        meshRenderer = GetComponent<MeshRenderer>();
+        source = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody>();
         rb.AddForce(transform.forward * thrust);
     }
@@ -49,6 +54,16 @@ public class Harpoon : MonoBehaviour
         anchor.transform.position = this.transform.position;
         anchor.transform.rotation = this.transform.rotation;
         anchor.transform.parent = other.transform;
+        if (other.gameObject.CompareTag("Grapple"))
+        {
+            source.PlayOneShot(grappleclip,1f);
+        }
+        else
+        {
+            source.Play();
+        }
+
+       
         this.anchor = anchor.transform;
     }
 
@@ -62,7 +77,10 @@ public class Harpoon : MonoBehaviour
 
         if (hit.CompareTag("Harpoon"))
         {
-            Destroy(gameObject);
+            source.PlayOneShot(destroyclip);
+            meshRenderer.enabled=(false);
+            Destroy(gameObject, 3f);
+            
             try
             {
                 hit.GetComponentInParent<IHarpoonable>().OnHarpoon();
