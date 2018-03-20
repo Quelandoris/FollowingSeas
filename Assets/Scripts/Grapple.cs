@@ -21,9 +21,14 @@ public class Grapple : MonoBehaviour {
     private Transform anchor;
     public float ropeDistanceMax;
     public float ropeConnectionMax;
-    
+    AudioSource source;
+    public AudioClip GrappleShootclip;
+    public AudioClip GrappleReelingclip;
+
+
     private void Start()
     {
+        source = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody>();
         fireable = true;
 
