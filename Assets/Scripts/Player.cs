@@ -37,6 +37,7 @@ public class Player : MonoBehaviour {
     public Animator Anim;
     public float foldingSpeed;
 
+    private Vector3 vel;
     TrackWind windScript;
     bool sailEnabled = false;
     public bool grounded;
@@ -54,7 +55,7 @@ public class Player : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-
+        vel = myRB.velocity;
         if (Input.GetKeyDown(KeyCode.Escape) && !Application.isEditor)
         {
             SceneManager.LoadScene(0);
@@ -223,6 +224,10 @@ public class Player : MonoBehaviour {
         if (collision.gameObject.CompareTag("Ground"))
         {
             grounded = true;
+        }
+        if (collision.gameObject.GetComponent<Rigidbody>())
+        {
+            myRB.velocity = new Vector3(vel.x, 0, vel.z);
         }
             
        
