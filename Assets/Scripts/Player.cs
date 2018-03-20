@@ -11,6 +11,10 @@ public class Player : MonoBehaviour {
     public float rotateSpeed = 1.2f;
     public float grappleStrength = 10;
 
+    public float forwardDrag = 0.5f;
+    public float sidewaysDrag = 0.9f;
+    public float maxSpeed = 25f;
+
 
     public LayerMask waterLayer;
     public LayerMask playerLayer;
@@ -178,22 +182,22 @@ public class Player : MonoBehaviour {
         }
 
 
-            Vector3 direction = hook.transform.position - transform.position;
-      //  Mathf.Clamp(grappleStrength, -10, 10);
-                if (attached)//what happens if you are attached to a stationary
-                {
-                if (hook.GetComponent<Grapple>().ropeDistanceMax < hook.GetComponent<Grapple>().ropeLength)//prevents player from extending past distnace
-                {
-                    myRB.AddForce(new Vector3(direction.x, 0, direction.z).normalized * (hook.GetComponent<Grapple>().ropeLength - hook.GetComponent<Grapple>().ropeDistanceMax) * 75);
-                }
-                if (reeling)
-                   {
+        Vector3 direction = hook.transform.position - transform.position;
+        //  Mathf.Clamp(grappleStrength, -10, 10);
+        if (attached)//what happens if you are attached to a stationary
+        {
+            if (hook.GetComponent<Grapple>().ropeDistanceMax < hook.GetComponent<Grapple>().ropeLength)//prevents player from extending past distnace
+            {
+                myRB.AddForce(new Vector3(direction.x, 0, direction.z).normalized * (hook.GetComponent<Grapple>().ropeLength - hook.GetComponent<Grapple>().ropeDistanceMax) * 75);
+            }
+            if (reeling)
+            {
                       
-                      myRB.AddForce(grappleStrength * new Vector3(direction.x, 0, direction.z).normalized);
-                   }
-                }
-                if (attachedToRB)
-                {
+                myRB.AddForce(grappleStrength * new Vector3(direction.x, 0, direction.z).normalized);
+            }
+        }
+        if (attachedToRB)
+        {
             if (reeling)
             {
                 //when you are connected to a moving object
@@ -201,19 +205,12 @@ public class Player : MonoBehaviour {
                 myRB.AddForce((Input.GetAxis("Mouse ScrollWheel") * scrollSpeed) * (hook.transform.position - transform.position).normalized);
                
             }
-            }
-            if (!launched)
-            {
-                // hook.transform.localPosition = new Vector3(0, -8f, 0);
-                hook.transform.localRotation = Quaternion.identity;
-            }
         }
-        void OnCollisionEnter(Collision collision)
+        if (!launched)
         {
             // hook.transform.localPosition = new Vector3(0, -8f, 0);
             hook.transform.localRotation = Quaternion.identity;
         }
-
         ApplyFriction();
     }
 
@@ -227,66 +224,77 @@ public class Player : MonoBehaviour {
         {
             myRB.velocity = new Vector3(vel.x, 0, vel.z);
         }
-            
-       
     }
-        void OnCollisionExit(Collision collision)
+
+    void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
         {
-            if (collision.gameObject.CompareTag("Ground"))
-            {
-                grounded = true;
-            }
-            
-       
-        }
-           void OnCollisionExit(Collision collision)
-          {
-              if (collision.gameObject.CompareTag("Ground"))
-             {
-                 grounded = false;
-              }
-          }
-
-        void Fire()
-        {
-            hook.transform.parent = null;
-            hook.GetComponent<Grapple>().Activate();
-
-            // hook.GetComponent<Grapple>().fired = (false);
-            launched = true;
-        }
-
-        /* public void Retract()
-         {
-             hook.transform.parent = grappleGun;
-             hook.transform.localPosition = new Vector3(0, 0, 1.5f);
-             hook.transform.localScale = new Vector3(1, 1, 1);
-             hook.transform.localRotation = Quaternion.identity;
-             hook.GetComponent<Grapple>().Detach();
-             hook.GetComponent<Rigidbody>().isKinematic = true;
-             hook.GetComponent<Grapple>().fired = true;
-             launched = false;
-             attached = false;
-         }*/
-
-        float AngleToSailPower(float angle)
-        {
-            //Calculate the sail thrust based on the angle
-            float compliment = 180f - angle;
-            float fraction = compliment / 180f;
-            float power = 8f * (fraction * fraction * fraction) - 18f * (fraction * fraction) + 12f * fraction - 1.5f;
-            //Debug.Log(power);
-            return Mathf.Max(0, power);
-        }
-
-        void TurnShip()
-        {
-            Vector3 velocity = myRB.velocity;
-            Vector3 onlyForward = Vector3.Project(velocity, transform.forward);
-            Vector3 otherVel = velocity - onlyForward;
-            transform.Rotate(Input.GetAxis("Horizontal") * rotateSpeed * Vector3.up, Space.World);
-            float sign = (onlyForward.normalized + transform.forward).magnitude > 1 ? 1 : -1;
-            myRB.velocity = onlyForward.magnitude * sign * transform.forward + otherVel;
+            grounded = false;
         }
     }
+
+    void Fire()
+    {
+        hook.transform.parent = null;
+        hook.GetComponent<Grapple>().Activate();
+
+        // hook.GetComponent<Grapple>().fired = (false);
+        launched = true;
+    }
+
+    /* public void Retract()
+        {
+            hook.transform.parent = grappleGun;
+            hook.transform.localPosition = new Vector3(0, 0, 1.5f);
+            hook.transform.localScale = new Vector3(1, 1, 1);
+            hook.transform.localRotation = Quaternion.identity;
+            hook.GetComponent<Grapple>().Detach();
+            hook.GetComponent<Rigidbody>().isKinematic = true;
+            hook.GetComponent<Grapple>().fired = true;
+            launched = false;
+            attached = false;
+        }*/
+
+    float AngleToSailPower(float angle)
+    {
+        //Calculate the sail thrust based on the angle
+        float compliment = 180f - angle;
+        float fraction = compliment / 180f;
+        float power = 8f * (fraction * fraction * fraction) - 18f * (fraction * fraction) + 12f * fraction - 1.5f;
+        //Debug.Log(power);
+        return Mathf.Max(0, power);
+    }
+
+    void TurnShip()
+    {
+        Vector3 velocity = myRB.velocity;
+        Vector3 onlyForward = Vector3.Project(velocity, transform.forward);
+        Vector3 otherVel = velocity - onlyForward;
+        transform.Rotate(Input.GetAxis("Horizontal") * rotateSpeed * Vector3.up, Space.World);
+        float sign = (onlyForward.normalized + transform.forward).magnitude > 1 ? 1 : -1;
+        myRB.velocity = (onlyForward.magnitude * 0.8f) * sign * transform.forward + onlyForward * 0.2f + otherVel;
+    }
+
+    void ApplyFriction()
+    {
+        Vector3 velocity = myRB.velocity;
+        Vector3 onlyForward = Vector3.Project(velocity, transform.forward);
+        velocity -= onlyForward;
+        Vector3 onlyVertical = Vector3.Project(velocity, Vector3.up);
+        velocity -= onlyVertical;
+        Vector3 onlySideways = velocity;
+        float forwardFriction = forwardDrag * 0.01f;
+        float sidewaysFriction = sidewaysDrag * 0.01f;
+        //Vector3 newForward = -forwardFriction * onlyForward + onlyForward;
+        //Vector3 newSideways = -sidewaysFriction * onlySideways + onlySideways;
+        Vector3 newForward = -forwardFriction * onlyForward + onlyForward;
+        Vector3 newSideways = -sidewaysFriction * onlySideways + onlySideways;
+        if(newForward.magnitude > maxSpeed)
+        {
+            newForward = newForward.normalized* 25;
+        }
+        myRB.velocity = newForward + newSideways + onlyVertical;
+     }
+}
 
