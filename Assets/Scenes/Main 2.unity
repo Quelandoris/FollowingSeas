@@ -384,6 +384,9 @@ MonoBehaviour:
   throttleSpeed: 7
   rotateSpeed: 0.5
   grappleStrength: 10
+  forwardDrag: 0.5
+  sidewaysDrag: 0.9
+  maxSpeed: 25
   waterLayer:
     serializedVersion: 2
     m_Bits: 16
@@ -400,6 +403,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   defaultLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  invisLayer:
     serializedVersion: 2
     m_Bits: 0
   grappleGun: {fileID: 714735041}
@@ -8966,6 +8972,18 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4819355771282242, guid: 11e6bc88566239544bd5841a89209994, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0.01271782
+      objectReference: {fileID: 0}
+    - target: {fileID: 4819355771282242, guid: 11e6bc88566239544bd5841a89209994, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.0072838305
+      objectReference: {fileID: 0}
+    - target: {fileID: 4819355771282242, guid: 11e6bc88566239544bd5841a89209994, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0.014341587
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 11e6bc88566239544bd5841a89209994, type: 2}
   m_IsPrefabParent: 0
@@ -10059,6 +10077,8 @@ MonoBehaviour:
   grappleGun: {fileID: 0}
   ropeDistanceMax: 0
   ropeConnectionMax: 0
+  GrappleShootclip: {fileID: 0}
+  GrappleReelingclip: {fileID: 0}
 --- !u!54 &1564743174
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12275,6 +12295,9 @@ MonoBehaviour:
   throttleSpeed: 7
   rotateSpeed: 0.5
   grappleStrength: 10
+  forwardDrag: 0.5
+  sidewaysDrag: 0.9
+  maxSpeed: 25
   waterLayer:
     serializedVersion: 2
     m_Bits: 16
@@ -12293,6 +12316,9 @@ MonoBehaviour:
   defaultLayer:
     serializedVersion: 2
     m_Bits: 1
+  invisLayer:
+    serializedVersion: 2
+    m_Bits: 0
   grappleGun: {fileID: 0}
   hook: {fileID: 0}
   rope: {fileID: 0}
