@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CollectibleAnim : MonoBehaviour {
-
+    //this is the animation of the collectable
     
     public Transform shield;
     float yPos;
