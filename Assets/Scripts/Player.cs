@@ -22,6 +22,7 @@ public class Player : MonoBehaviour {
     public LayerMask grappleLayer;
     public LayerMask harpoonLayer;
     public LayerMask defaultLayer;
+    public LayerMask invisLayer;
 
     LayerMask solidLayers;
 
@@ -45,9 +46,9 @@ public class Player : MonoBehaviour {
     bool reeling = true;
     // Use this for initialization
     void Start() {
-        Anim = GetComponent<Animator>();
+        //Anim = GetComponent<Animator>();
         windScript = GetComponent<TrackWind>();
-        solidLayers = ~(waterLayer | playerLayer | currentLayer);
+        solidLayers = ~(waterLayer | playerLayer | currentLayer | invisLayer);
         myRB = GetComponentInParent<Rigidbody>();
         
     }
@@ -58,6 +59,9 @@ public class Player : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Escape) && !Application.isEditor)
         {
             SceneManager.LoadScene(0);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
         }
         RaycastHit mouseHit;
         Vector3 lookTarget;
@@ -202,7 +206,7 @@ public class Player : MonoBehaviour {
             {
                 //when you are connected to a moving object
                 // myRB.AddForce(grappleStrength * (hook.transform.position - transform.position).normalized);
-                myRB.AddForce((Input.GetAxis("Mouse ScrollWheel") * scrollSpeed) * (hook.transform.position - transform.position).normalized);
+                myRB.AddForce((Input.GetAxis("Mouse ScrollWheel") * scrollSpeed) * new Vector3(direction.x, 0, direction.z).normalized);
                
             }
         }
