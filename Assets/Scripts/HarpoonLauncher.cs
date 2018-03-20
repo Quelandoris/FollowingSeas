@@ -9,12 +9,8 @@ public class HarpoonLauncher : MonoBehaviour {
     public float timeBetweenShots = 0.5f;
     private float shotCounter;
     public Transform firePoint;
-     
-    //public AudioClip clip;
-
-   
-
-    public void Update ()
+	
+	public void Update ()
     {
         shotCounter -= Time.deltaTime;
         if (isShooting)
@@ -23,7 +19,7 @@ public class HarpoonLauncher : MonoBehaviour {
             {
                 shotCounter = timeBetweenShots;
                 Instantiate(harpoon, firePoint.position, (firePoint.rotation));
-                
+
                 gameObject.GetComponentInParent<Rigidbody>().AddForceAtPosition(-1 * transform.up, transform.position, ForceMode.Impulse);//this is our recoil
             }
             
