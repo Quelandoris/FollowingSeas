@@ -17,11 +17,11 @@ public class CameraScript : MonoBehaviour
     public GameObject UnderwaterEffect;
 
     LayerMask UnPhaseableLayers;
-    public LayerMask waterLayer;
+    public LayerMask UnTargetedLayers;
 
     void Start()
     {
-        UnPhaseableLayers = ~(waterLayer);
+        UnPhaseableLayers = ~(UnTargetedLayers);
         
         UnderwaterEffect.SetActive(false);
     }
@@ -43,7 +43,7 @@ public class CameraScript : MonoBehaviour
         {
             distance = maxDistance;
         }
-        if (Physics.Linecast(transform.parent.position, desiredCameraPos, out hit, waterLayer))
+        if (Physics.Linecast(transform.parent.position, desiredCameraPos, out hit, UnTargetedLayers))
         {
             UnderwaterEffect.SetActive(true);
         }
