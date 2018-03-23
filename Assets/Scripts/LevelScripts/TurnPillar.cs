@@ -23,9 +23,10 @@ public class TurnPillar : MonoBehaviour {
             myRB.AddTorque(Vector3.up * 3);
         }
 
-        if(Vector3.Angle(transform.parent.forward, transform.forward) <= 15)
+        if(Vector3.Angle(transform.parent.forward, transform.forward) <= 5)
         {
             solved = true;
+            myRB.isKinematic = (true);
         }
         else
         {

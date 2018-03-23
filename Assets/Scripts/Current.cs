@@ -17,6 +17,7 @@ public class Current : MonoBehaviour {
             Destroy(arrow);
         }
         GetComponent<MeshRenderer>().enabled = false;
+        GetComponent<Collider>().enabled = false;
     }
 
     /*void FixedUpdate()
