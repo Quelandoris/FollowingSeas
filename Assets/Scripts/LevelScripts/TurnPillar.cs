@@ -5,11 +5,13 @@ using UnityEngine;
 public class TurnPillar : MonoBehaviour {
     Rigidbody myRB;
     bool solved;
+    public GameObject output;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         myRB = GetComponentInParent<Rigidbody>();
-	}
+        output.SetActive(false);
+    }
 
     void FixedUpdate()
     {
@@ -27,6 +29,7 @@ public class TurnPillar : MonoBehaviour {
         {
             solved = true;
             myRB.isKinematic = (true);
+            output.SetActive(true);
         }
         else
         {
