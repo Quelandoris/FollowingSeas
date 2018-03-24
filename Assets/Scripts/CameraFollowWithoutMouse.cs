@@ -27,8 +27,8 @@ public class CameraFollowWithoutMouse : MonoBehaviour {
         Vector3 rot = transform.localRotation.eulerAngles;
         rotationY = rot.y;
         rotationX = rot.x;
-        Cursor.lockState = CursorLockMode.Locked;// Disables movement of mouse press escape while in play mode to move freely
-        Cursor.visible = false; // Disables the mouses visiblity when playing the game
+      //  Cursor.lockState = CursorLockMode.Locked;// Disables movement of mouse press escape while in play mode to move freely
+        //Cursor.visible = false; // Disables the mouses visiblity when playing the game
     }
     private void Update()
     {
