@@ -50,6 +50,7 @@ public class Grapple : MonoBehaviour {
             retracting = true;
             
         }
+        
         if(retracting)
         {
             Retract();
@@ -71,6 +72,7 @@ public class Grapple : MonoBehaviour {
             attachedRB.AddForceAtPosition((Input.GetAxis("Mouse ScrollWheel") * -scrollSpeed) * new Vector3(direction.x, 0, direction.z).normalized, transform.position);
             ropeDistanceMax = Vector3.Distance(gameObject.transform.position, player.transform.position);
         }
+       
        
     }
 
