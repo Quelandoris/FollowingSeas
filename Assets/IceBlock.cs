@@ -5,9 +5,11 @@ using UnityEngine;
 public class IceBlock : MonoBehaviour {
     public float targetScale = 0.1f;
     public float shrinkSpeed = 0.1f;
+    public float lifeTime = 30f;
+    Rigidbody rb;
     // Use this for initialization
     void Start () {
-		
+        rb = GetComponent<Rigidbody>();
 	}
 	
 	// Update is called once per frame
@@ -15,6 +17,14 @@ public class IceBlock : MonoBehaviour {
 
          
         transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(targetScale, targetScale, targetScale), Time.deltaTime* shrinkSpeed); //transforms local scale to target scale by the shrink speed
-        Destroy(gameObject, 10f);//destroys the iceblock after x seconds
+        Destroy(gameObject, lifeTime);//destroys the iceblock after x seconds
 }
+    private void OnTriggerEnter(Collider other)
+    {
+        if((other.gameObject.GetComponent("IceTrigger") as IceTrigger) != null)
+        {
+            transform.localPosition = other.gameObject.transform.position;
+            rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
+        }
+    }
 }
