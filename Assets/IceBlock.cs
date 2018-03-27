@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IceBlock : MonoBehaviour {
+public class IceBlock : TemporarySpawned {
     public float targetScale = 0.1f;
     public float shrinkSpeed = 0.1f;
     public float lifeTime = 30f;
@@ -26,5 +26,10 @@ public class IceBlock : MonoBehaviour {
             transform.localPosition = other.gameObject.transform.position;
             rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionY;
         }
+    }
+
+    public void OnDestroy()
+    {
+        spawner.Secondary();
     }
 }
