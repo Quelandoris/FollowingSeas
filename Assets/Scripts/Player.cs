@@ -275,9 +275,10 @@ public class Player : MonoBehaviour {
         Vector3 velocity = myRB.velocity;
         Vector3 onlyForward = Vector3.Project(velocity, transform.forward);
         Vector3 otherVel = velocity - onlyForward;
+        float driftAmt = 0.1f;
         transform.Rotate(Input.GetAxis("Horizontal") * rotateSpeed * Vector3.up, Space.World);
         float sign = (onlyForward.normalized + transform.forward).magnitude > 1 ? 1 : -1;
-        myRB.velocity = (onlyForward.magnitude * 0.8f) * sign * transform.forward + onlyForward * 0.2f + otherVel;
+        myRB.velocity = (onlyForward.magnitude * (1-driftAmt)) * sign * transform.forward + onlyForward * driftAmt + otherVel;
     }
 
     void ApplyFriction()
@@ -288,15 +289,15 @@ public class Player : MonoBehaviour {
         Vector3 onlyVertical = Vector3.Project(velocity, Vector3.up);
         velocity -= onlyVertical;
         Vector3 onlySideways = velocity;
-        float forwardFriction = forwardDrag * 0.01f;
-        float sidewaysFriction = sidewaysDrag * 0.01f;
+        float forwardFriction = forwardDrag * 0.04f;
+        float sidewaysFriction = sidewaysDrag * 0.04f;
         //Vector3 newForward = -forwardFriction * onlyForward + onlyForward;
         //Vector3 newSideways = -sidewaysFriction * onlySideways + onlySideways;
         Vector3 newForward = -forwardFriction * onlyForward + onlyForward;
         Vector3 newSideways = -sidewaysFriction * onlySideways + onlySideways;
         if(newForward.magnitude > maxSpeed)
         {
-            newForward = newForward.normalized* 25;
+            newForward = newForward.normalized * maxSpeed;
         }
         myRB.velocity = newForward + newSideways + onlyVertical;
      }

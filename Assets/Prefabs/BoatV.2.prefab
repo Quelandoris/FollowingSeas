@@ -1620,8 +1620,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1366226412685464}
-  m_LocalRotation: {x: -0, y: 0.9577181, z: -0, w: 0.2877084}
-  m_LocalPosition: {x: -294.4, y: 14.95, z: 713.4}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 144.95016, y: 5, z: -11.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4804893382495584}
@@ -3517,6 +3517,8 @@ MonoBehaviour:
   grappleGun: {fileID: 4462058501567622}
   ropeDistanceMax: 0
   ropeConnectionMax: 0
+  GrappleShootclip: {fileID: 0}
+  GrappleReelingclip: {fileID: 0}
 --- !u!114 &114692297060289744
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3530,7 +3532,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   throttleSpeed: 10
   rotateSpeed: 1
-  grappleStrength: 10
+  grappleStrength: 40
   forwardDrag: 0.2
   sidewaysDrag: 0.5
   maxSpeed: 25
