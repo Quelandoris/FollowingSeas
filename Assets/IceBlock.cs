@@ -24,7 +24,7 @@ public class IceBlock : MonoBehaviour {
         if((other.gameObject.GetComponent("IceTrigger") as IceTrigger) != null)
         {
             transform.localPosition = other.gameObject.transform.position;
-            rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
+            rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionY;
         }
     }
 }
