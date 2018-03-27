@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 33868365224330876}
   - component: {fileID: 65091638741632122}
   - component: {fileID: 23547686540230310}
-  - component: {fileID: 114721871031743588}
   m_Layer: 0
   m_Name: WinVolume
   m_TagString: Untagged
@@ -94,17 +93,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114721871031743588
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1873269587377264}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad47bae951403a44489e1f35e231f11a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Continue: {fileID: 1098549824903526, guid: 9fb9c3c9787de7c4799227208d26f99e, type: 2}
-  Exit: {fileID: 1925725680563410, guid: 079ed99f9756678478cc2b55dc6febc8, type: 2}
-  Win: {fileID: 1414099058294236, guid: f09b146bf02880345a6fbddff4707e2c, type: 2}
