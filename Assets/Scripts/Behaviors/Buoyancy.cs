@@ -8,8 +8,9 @@ public class Buoyancy : MonoBehaviour {
     public LayerMask waterLayer;
     public float height;    //Height and cross section used to calculate the magnitude of buoyant force (proportional to volume submerged/displaced)
     public float crossSection;
+    float vertDrag = 0.75f;
 
-	void Start () {
+    void Start () {
         myRB = GetComponent<Rigidbody>();
 	}
 
@@ -21,6 +22,14 @@ public class Buoyancy : MonoBehaviour {
             Vector3 keel = transform.position + (height / 2 * -1 * transform.up); //Get a point at the very bottom of the floating object (used to determine how much of it is submerged)
             float depth = surface.point.y - keel.y; //Calculate the distance between the lowest point of the object and the water surface
             depth = Mathf.Max(0, depth); //Don't allow negative depth values
+            if(depth > 0)
+            {
+                float vertFriction = vertDrag * 0.04f;
+                Vector3 onlyVertical = Vector3.Project(myRB.velocity, Vector3.up);
+                Vector3 otherVel = myRB.velocity - onlyVertical;
+                Vector3 newVertical = -vertFriction * onlyVertical + onlyVertical;
+                myRB.velocity = otherVel + newVertical;
+            }
             float submergedVolume = Mathf.Min(depth, height) * crossSection; //Approximate the volume of the submerged area. Min is to cap it out at the object's entire volume
             myRB.AddForce(submergedVolume * surface.normal); //Apply the buoyant force
 
