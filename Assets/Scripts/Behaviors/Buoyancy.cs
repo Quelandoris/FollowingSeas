@@ -33,17 +33,36 @@ public class Buoyancy : MonoBehaviour {
             float submergedVolume = Mathf.Min(depth, height) * crossSection; //Approximate the volume of the submerged area. Min is to cap it out at the object's entire volume
             myRB.AddForce(submergedVolume * surface.normal); //Apply the buoyant force
 
-            //This is where it gets tricky. I tried several approaches before coming up with this one.
-            //Part 2: Orientation Correction
-            float leanIntensity = Vector3.Angle(surface.normal, transform.up); //Calculate the angle difference between the boat's normal and the water surface's normal
-            Vector3 leanAxis = Vector3.Cross(surface.normal, transform.up); //Thank god for linear algebra. Gets an axis perpendicular to both normals.
-            Vector3 deltaAngle = Quaternion.AngleAxis(leanIntensity, leanAxis).eulerAngles; //Using this axis and the float angle difference, get a Vector3 rotation that is the difference between them
+            
+            if (depth > 0)
+            {
+                //This is where it gets tricky. I tried several approaches before coming up with this one.
+                //Part 2: Orientation Correction
+                float leanIntensity = Vector3.Angle(surface.normal, transform.up); //Calculate the angle difference between the boat's normal and the water surface's normal
+                Vector3 leanAxis = Vector3.Cross(surface.normal, transform.up); //Thank god for linear algebra. Gets an axis perpendicular to both normals.
+                Vector3 deltaAngle = Quaternion.AngleAxis(leanIntensity, leanAxis).eulerAngles; //Using this axis and the float angle difference, get a Vector3 rotation that is the difference between them
 
-            deltaAngle.x = deltaAngle.x > 180 ? deltaAngle.x - 360 : deltaAngle.x; //Unity doesn't like negative angles
-            deltaAngle.y = deltaAngle.y > 180 ? deltaAngle.y - 360 : deltaAngle.y; //But I do
-            deltaAngle.z = deltaAngle.z > 180 ? deltaAngle.z - 360 : deltaAngle.z; //So tough luck.
+                deltaAngle.x = deltaAngle.x > 180 ? deltaAngle.x - 360 : deltaAngle.x; //Unity doesn't like negative angles
+                deltaAngle.y = deltaAngle.y > 180 ? deltaAngle.y - 360 : deltaAngle.y; //But I do
+                deltaAngle.z = deltaAngle.z > 180 ? deltaAngle.z - 360 : deltaAngle.z; //So tough luck.
 
-            myRB.AddTorque(-leanIntensity * 0.1f * deltaAngle); //Now that we have the rotation from the water's normal to the boat's, we can torque the boat in the reverse direction to make it right itself (and overshoot it for style, angular drag will mellow things out in the end)
+                myRB.AddTorque(-leanIntensity * 0.1f * deltaAngle); //Now that we have the rotation from the water's normal to the boat's, we can torque the boat in the reverse direction to make it right itself (and overshoot it for style, angular drag will mellow things out in the end)
+            }
+            else
+            {
+                //This is where it gets tricky. I tried several approaches before coming up with this one.
+                //Part 2: Orientation Correction
+                float leanIntensity = Vector3.Angle(Vector3.up, transform.up); //Calculate the angle difference between the boat's normal and the water surface's normal
+                Vector3 leanAxis = Vector3.Cross(Vector3.up, transform.up); //Thank god for linear algebra. Gets an axis perpendicular to both normals.
+                Vector3 deltaAngle = Quaternion.AngleAxis(leanIntensity, leanAxis).eulerAngles; //Using this axis and the float angle difference, get a Vector3 rotation that is the difference between them
+
+                deltaAngle.x = deltaAngle.x > 180 ? deltaAngle.x - 360 : deltaAngle.x; //Unity doesn't like negative angles
+                deltaAngle.y = deltaAngle.y > 180 ? deltaAngle.y - 360 : deltaAngle.y; //But I do
+                deltaAngle.z = deltaAngle.z > 180 ? deltaAngle.z - 360 : deltaAngle.z; //So tough luck.
+
+                myRB.AddTorque(-leanIntensity * 0.1f * deltaAngle); //Now that we have the rotation from the water's normal to the boat's, we can torque the boat in the reverse direction to make it right itself (and overshoot it for style, angular drag will mellow things out in the end)
+            }
+            
         }
     }
 }
