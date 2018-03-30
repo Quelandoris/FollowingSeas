@@ -44,12 +44,21 @@ public class Player : MonoBehaviour {
     public bool attachedToRB = false;
     float scrollSpeed = -75;
     bool reeling = true;
+
+    bool onIce = false;
+    float originalForwardDrag;
+    float originalHorizontalDrag;
+    float originalAirDrag;
     // Use this for initialization
     void Start() {
-        //Anim = GetComponent<Animator>();
-        windScript = GetComponent<TrackWind>();
-        solidLayers = ~(waterLayer | playerLayer | currentLayer | invisLayer);
         myRB = GetComponentInParent<Rigidbody>();
+        originalForwardDrag = forwardDrag;
+        originalHorizontalDrag = sidewaysDrag;
+        originalAirDrag = myRB.drag;
+    //Anim = GetComponent<Animator>();
+    windScript = GetComponent<TrackWind>();
+        solidLayers = ~(waterLayer | playerLayer | currentLayer | invisLayer);
+        
         
     }
 
@@ -130,7 +139,7 @@ public class Player : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        if (!grounded) {
+        if (!grounded && !onIce) {
             myRB.AddForce(Input.GetAxis("Vertical") * throttleSpeed * transform.forward, ForceMode.Acceleration);
             TurnShip();
             myRB.AddTorque(Input.GetAxis("Horizontal") * -1 * transform.forward);
@@ -224,6 +233,13 @@ public class Player : MonoBehaviour {
         {
             grounded = true;
         }
+        if (collision.gameObject.CompareTag("IceSlide"))
+        {
+            onIce = true;
+            forwardDrag = 0;
+            sidewaysDrag = 0;
+            myRB.drag = 0;
+        }
         if (collision.gameObject.GetComponent<Rigidbody>())
         {
             myRB.velocity = new Vector3(vel.x, 0, vel.z);
@@ -235,6 +251,13 @@ public class Player : MonoBehaviour {
         if (collision.gameObject.CompareTag("Ground"))
         {
             grounded = false;
+        }
+        if (collision.gameObject.CompareTag("IceSlide"))
+        {
+            onIce = false;
+            forwardDrag = originalForwardDrag;
+            sidewaysDrag = originalHorizontalDrag;
+            myRB.drag = originalAirDrag;
         }
     }
 
