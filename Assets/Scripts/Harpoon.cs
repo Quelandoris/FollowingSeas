@@ -31,12 +31,12 @@ public class Harpoon : MonoBehaviour
         }
     }
 
-    public void OnTriggerEnter(Collider other)
+  /*  public void OnTriggerEnter(Collider other)
     {
 
         HarpoonHit(other.gameObject);
 
-    }
+    }*/
    public void OnCollisionEnter(Collision other)
     {
 
