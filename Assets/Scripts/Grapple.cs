@@ -24,6 +24,7 @@ public class Grapple : MonoBehaviour {
     AudioSource source;
     public AudioClip GrappleShootclip;
     public AudioClip GrappleReelingclip;
+    
 
 
     private void Start()
@@ -66,11 +67,26 @@ public class Grapple : MonoBehaviour {
             
             if (ropeDistanceMax < ropeLength)
             {
-                attachedRB.AddForceAtPosition(new Vector3(direction.x, 0, direction.z).normalized * (ropeLength-ropeDistanceMax)*300, transform.position);
+                attachedRB.AddForceAtPosition(new Vector3(direction.x, 0, direction.z).normalized * (ropeLength-ropeDistanceMax)*(attachedRB.mass*400), transform.position);
             }
             // += Input.GetAxis("Mouse ScrollWheel") * scrollSpeed;
-            attachedRB.AddForceAtPosition((Input.GetAxis("Mouse ScrollWheel") * -scrollSpeed) * new Vector3(direction.x, 0, direction.z).normalized, transform.position);
-            ropeDistanceMax = Vector3.Distance(gameObject.transform.position, player.transform.position);
+            if (Input.GetKey(KeyCode.Q))
+            {
+                attachedRB.AddForceAtPosition(40 * new Vector3(direction.x, 0, direction.z).normalized, transform.position);
+                ropeDistanceMax = Vector3.Distance(gameObject.transform.position, player.transform.position);
+            }
+            else if(Input.GetKey(KeyCode.E))
+            {
+               // attachedRB.AddForceAtPosition(-40 * new Vector3(direction.x, 0, direction.z).normalized, transform.position);
+                
+                ropeDistanceMax = Vector3.Distance(gameObject.transform.position, player.transform.position);
+            }
+            else
+            {
+                attachedRB.AddForceAtPosition((Input.GetAxis("Mouse ScrollWheel") * -scrollSpeed) * new Vector3(direction.x, 0, direction.z).normalized, transform.position);
+            }
+            
+            
         }
        
        
@@ -87,6 +103,7 @@ public class Grapple : MonoBehaviour {
             anchor.transform.position = this.transform.position;
             anchor.transform.rotation = this.transform.rotation;
             anchor.transform.parent = collision.transform;
+            ropeDistanceMax = Vector3.Distance(gameObject.transform.position, player.transform.position);
             //this.anchor = anchor.transform;
             if (!collision.gameObject.CompareTag("Grapple"))
             {
