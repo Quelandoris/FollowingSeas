@@ -15,7 +15,7 @@ public class TurnPillar : MonoBehaviour {
 
     void FixedUpdate()
     {
-        float angle = (transform.localRotation.y + 360) % 90;
+        /*float angle = (transform.localRotation.y + 360) % 90;
         if(angle <= 45)
         {
             myRB.AddTorque(Vector3.down * 3);
@@ -23,7 +23,7 @@ public class TurnPillar : MonoBehaviour {
         else
         {
             myRB.AddTorque(Vector3.up * 3);
-        }
+        }*/
 
         if(Vector3.Angle(transform.parent.forward, transform.forward) <= 5)
         {

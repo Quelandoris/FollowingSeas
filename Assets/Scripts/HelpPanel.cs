@@ -13,7 +13,7 @@ public class HelpPanel : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.Tab)){
+		if(Input.GetKeyDown(KeyCode.F1)){
 			panel.SetActive(!panel.activeSelf);
 			tab.SetActive(!panel.activeSelf);
 		}

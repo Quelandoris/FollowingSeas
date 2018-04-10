@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4459578049898730}
   - component: {fileID: 33984447122673952}
   - component: {fileID: 23516579140704152}
+  - component: {fileID: 64432909435248612}
   m_Layer: 0
   m_Name: PF_BigRock1
   m_TagString: Untagged
@@ -35,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1882397323476110}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -380.67633, y: 5.0003815, z: 1163.0718}
+  m_LocalPosition: {x: 85.41046, y: 5.0003815, z: 546.69995}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -54,7 +55,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: bb3dde662644f254b9a44d1549a3fe8c, type: 2}
+  - {fileID: 2100000, guid: 45c63075a23b7e843a095a04e490b6a9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -79,4 +80,18 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1882397323476110}
+  m_Mesh: {fileID: 4300000, guid: 2339c4ec15efdc84580d5d5aa8ee2aca, type: 3}
+--- !u!64 &64432909435248612
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1882397323476110}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 1
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 2339c4ec15efdc84580d5d5aa8ee2aca, type: 3}

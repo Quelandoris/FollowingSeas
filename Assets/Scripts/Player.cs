@@ -65,13 +65,13 @@ public class Player : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         vel = myRB.velocity;
-        if (Input.GetKeyDown(KeyCode.Escape) && !Application.isEditor)
+      /*  if (Input.GetKeyDown(KeyCode.Escape) && !Application.isEditor)
         {
             SceneManager.LoadScene(0);
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
-        }
+        }*/
         RaycastHit mouseHit;
         Vector3 lookTarget;
         if (Physics.Raycast(new Ray(transform.Find("Camera follow").position, Camera.main.transform.forward), out mouseHit, 100000, solidLayers))
@@ -214,14 +214,15 @@ public class Player : MonoBehaviour {
             if (reeling)
             {
                 //when you are connected to a moving object
-                // myRB.AddForce(grappleStrength * (hook.transform.position - transform.position).normalized);
-                myRB.AddForce((Input.GetAxis("Mouse ScrollWheel") * scrollSpeed) * new Vector3(direction.x, 0, direction.z).normalized);
+               
+                //this makes the player meet the attached rigid body in the middle of the grapple
+               // myRB.AddForce((Input.GetAxis("Mouse ScrollWheel") * scrollSpeed) * new Vector3(direction.x, 0, direction.z).normalized);
                
             }
         }
         if (!launched)
         {
-            // hook.transform.localPosition = new Vector3(0, -8f, 0);
+            
             hook.transform.localRotation = Quaternion.identity;
         }
         ApplyFriction();
