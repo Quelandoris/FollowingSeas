@@ -6,10 +6,10 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Skybox
-  m_Shader: {fileID: 4800000, guid: 7fd3600f4ac91dc4d97f0c9019a1eec7, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
+  m_Name: M_RedCrystalTop 2
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: _EMISSION
+  m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -35,11 +35,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: d538c13176651b94ab305f72ebacdd7c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: a0d0573dc4370434ab9a60072fa3073c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -60,24 +60,17 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
-    - _Glossiness: 0.5
+    - _Glossiness: 0.888
     - _GlossyReflections: 1
-    - _Metallic: 0
+    - _Metallic: 0.2
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _SkyExponent1: 2
-    - _SkyIntensity: 1.24
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _SunIntensity: 10
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _MoonVector: {r: 0.73, g: 200, b: 0.74, a: 0}
-    - _SkyColor1: {r: 0.200716, g: 0.614148, b: 0.722, a: 0}
-    - _SkyColor2: {r: 1, g: 0.33519268, b: 0.16176468, a: 0}
-    - _SunColor: {r: 0.9632353, g: 0.855775, b: 0.25497407, a: 1}
+    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
