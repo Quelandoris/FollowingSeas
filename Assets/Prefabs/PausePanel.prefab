@@ -125,8 +125,8 @@ GameObject:
   - component: {fileID: 224456596961167538}
   - component: {fileID: 222499412261431202}
   - component: {fileID: 114301664440476800}
-  - component: {fileID: 114518890660216572}
   - component: {fileID: 225966279109893008}
+  - component: {fileID: 114718401729586122}
   m_Layer: 5
   m_Name: PausePanel
   m_TagString: Untagged
@@ -754,7 +754,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114518890660216572}
+      - m_Target: {fileID: 114718401729586122}
         m_MethodName: LevelSelect
         m_Mode: 1
         m_Arguments:
@@ -837,19 +837,6 @@ MonoBehaviour:
   m_Text: 'Level 4
 
 '
---- !u!114 &114518890660216572
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1234369971754292}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb3bbd298afd5344ca211687d9ee25f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelSelect: {fileID: 225762325343773480}
-  regularPanal: {fileID: 225516922201544130}
 --- !u!114 &114526211012477908
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -889,7 +876,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114518890660216572}
+      - m_Target: {fileID: 114718401729586122}
         m_MethodName: UnPause
         m_Mode: 1
         m_Arguments:
@@ -1087,6 +1074,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3f9903cedf60984996cf7dde6c6f55e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114718401729586122
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1234369971754292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16e4a56f7109de047a1b5b98f925d08a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelSelect: {fileID: 225762325343773480}
+  regularPanal: {fileID: 225516922201544130}
 --- !u!114 &114718600188216074
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1186,7 +1186,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114518890660216572}
+      - m_Target: {fileID: 114718401729586122}
         m_MethodName: Back
         m_Mode: 1
         m_Arguments:
