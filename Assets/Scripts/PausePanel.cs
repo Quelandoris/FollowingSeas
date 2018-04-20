@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PausePanel : MonoBehaviour {
 
@@ -8,6 +9,10 @@ public class PausePanel : MonoBehaviour {
     public CanvasGroup levelSelect;
     public CanvasGroup regularPanal;
     private bool activated;
+    private winController WinController;
+    private GameObject WinVolume;
+    private int sceneID;
+    
     // Use this for initialization 
     void Awake()
     {
@@ -15,6 +20,18 @@ public class PausePanel : MonoBehaviour {
         Time.timeScale = 1;
         pausePanel.alpha = 0;
         pausePanel.interactable = false;
+        sceneID = SceneManager.GetActiveScene().buildIndex;
+       
+        if(sceneID == 2)
+        {
+            WinVolume = GameObject.Find("WinVolume1");
+            WinController = GameObject.Find("WinVolume1").GetComponent<winController>(); ;
+            WinVolume.SetActive(false);
+        }
+        else
+        {
+            WinController = GameObject.Find("WinVolume").GetComponent<winController>();
+        }
 
     }
 
@@ -24,7 +41,6 @@ public class PausePanel : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
 
-           
             activated = !activated;
 
         }
@@ -33,15 +49,27 @@ public class PausePanel : MonoBehaviour {
             pausePanel.alpha = 1;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            pausePanel.blocksRaycasts = true;
             pausePanel.interactable = true;
             Time.timeScale = 0;
         }
         else
         {
             pausePanel.alpha = 0;
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+
+            if (WinController.Won == false)
+            { 
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
             pausePanel.interactable = false;
+            pausePanel.blocksRaycasts = false;
             Time.timeScale = 1;
             
         }

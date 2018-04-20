@@ -9,6 +9,7 @@ public class winController : MonoBehaviour {
     public GameObject Continue;
     public GameObject Exit;
     public GameObject Win;
+    public bool Won;
 
 
     void Start () {
@@ -24,6 +25,7 @@ public class winController : MonoBehaviour {
     {
         if (other.CompareTag("Player"))
         {
+            Won = true;
             Continue.SetActive(true);
             Exit.SetActive(true);
             Win.SetActive(true);
