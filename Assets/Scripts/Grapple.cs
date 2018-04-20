@@ -68,6 +68,11 @@ public class Grapple : MonoBehaviour {
             if (ropeDistanceMax < ropeLength)
             {
                 attachedRB.AddForceAtPosition(new Vector3(direction.x, 0, direction.z).normalized * (ropeLength-ropeDistanceMax)*(attachedRB.mass*400), transform.position);
+                
+            }
+            if(ropeDistanceMax < ropeLength - 1)
+            {
+                Retract();
             }
             // += Input.GetAxis("Mouse ScrollWheel") * scrollSpeed;
             if (Input.GetKey(KeyCode.Q))
@@ -83,7 +88,15 @@ public class Grapple : MonoBehaviour {
             }
             else
             {
-                attachedRB.AddForceAtPosition((Input.GetAxis("Mouse ScrollWheel") * -scrollSpeed) * new Vector3(direction.x, 0, direction.z).normalized, transform.position);
+                try
+                {
+                    attachedRB.AddForceAtPosition((Input.GetAxis("Mouse ScrollWheel") * -scrollSpeed) * new Vector3(direction.x, 0, direction.z).normalized, transform.position);
+                }
+                catch
+                {
+
+                }
+        
             }
             
             
