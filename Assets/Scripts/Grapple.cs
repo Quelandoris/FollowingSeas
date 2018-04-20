@@ -69,12 +69,14 @@ public class Grapple : MonoBehaviour {
             if (ropeDistanceMax < ropeLength)
             {
                 attachedRB.AddForceAtPosition(new Vector3(direction.x, 0, direction.z).normalized * (ropeLength-ropeDistanceMax)*(attachedRB.mass*400), transform.position);
-                
+                player.gameObject.GetComponent<Player>().playerPushBack = true;
+                // player.AddForce(new Vector3(direction.x, 0, direction.z).normalized * (hook.GetComponent<Grapple>().ropeLength - hook.GetComponent<Grapple>().ropeDistanceMax) * 75);
             }
-            if(ropeDistanceMax < ropeLength - 1)
+            else
             {
-                Retract();
+                player.gameObject.GetComponent<Player>().playerPushBack = false;
             }
+           
             // += Input.GetAxis("Mouse ScrollWheel") * scrollSpeed;
             if (Input.GetKey(KeyCode.Q))
             {

@@ -36,7 +36,7 @@ public class Player : MonoBehaviour {
     public HarpoonLauncher harpoonLauncher;
     public Animator Anim;
     public float foldingSpeed;
-
+    public Vector3 direction;
     private Vector3 vel;
     TrackWind windScript;
     bool sailEnabled = false;
@@ -44,7 +44,7 @@ public class Player : MonoBehaviour {
     public bool attachedToRB = false;
     float scrollSpeed = -75;
     bool reeling = true;
-
+    public bool playerPushBack;
     bool onIce = false;
     float originalForwardDrag;
     float originalHorizontalDrag;
@@ -137,8 +137,9 @@ public class Player : MonoBehaviour {
         rope.transform.localScale = new Vector3(1, 1, Vector3.Distance(hook.transform.position, rope.transform.position));
     }
 
-    private void FixedUpdate()
+    public void FixedUpdate()
     {
+
         if (!grounded && !onIce) {
             myRB.AddForce(Input.GetAxis("Vertical") * throttleSpeed * transform.forward, ForceMode.Acceleration);
             TurnShip();
@@ -196,13 +197,24 @@ public class Player : MonoBehaviour {
 
 
         Vector3 direction = hook.transform.position - transform.position;
+        if (playerPushBack)
+        {
+            myRB.AddForce(new Vector3(direction.x, 0, direction.z).normalized * (hook.GetComponent<Grapple>().ropeLength - hook.GetComponent<Grapple>().ropeDistanceMax) * 75);
+            playerPushBack = false;
+        }
         //  Mathf.Clamp(grappleStrength, -10, 10);
         if (attached)//what happens if you are attached to a stationary
         {
             if (hook.GetComponent<Grapple>().ropeDistanceMax < hook.GetComponent<Grapple>().ropeLength)//prevents player from extending past distnace
             {
-                myRB.AddForce(new Vector3(direction.x, 0, direction.z).normalized * (hook.GetComponent<Grapple>().ropeLength - hook.GetComponent<Grapple>().ropeDistanceMax) * 75);
+                playerPushBack = true;
+
             }
+            else
+            {
+                playerPushBack = false;
+            }
+            
             if (reeling)
             {
                       
@@ -325,5 +337,6 @@ public class Player : MonoBehaviour {
         }
         myRB.velocity = newForward + newSideways + onlyVertical;
      }
+    
 }
 
