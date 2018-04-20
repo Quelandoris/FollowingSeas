@@ -10656,6 +10656,10 @@ Prefab:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1873269587377264, guid: 4e5b76657e6dffd4f9117c2fb1fa722d, type: 2}
+      propertyPath: m_Name
+      value: WinVolume1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4e5b76657e6dffd4f9117c2fb1fa722d, type: 2}
   m_IsPrefabParent: 0
@@ -44766,9 +44770,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e44cbe523e9eff14dac20a53619cdf79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1835901827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1835901825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07ad03d8d88c51f40b68d3c35c4c34a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   Continue: {fileID: 1979571627}
   Exit: {fileID: 980100253}
   Win: {fileID: 393847073}
+  Won: 0
 --- !u!1001 &1840366777
 Prefab:
   m_ObjectHideFlags: 0
