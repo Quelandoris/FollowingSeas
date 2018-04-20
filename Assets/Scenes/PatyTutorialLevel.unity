@@ -19933,11 +19933,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4309696738052484, guid: 11e6bc88566239544bd5841a89209994, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 511.3
+      value: 538.6
       objectReference: {fileID: 0}
     - target: {fileID: 4309696738052484, guid: 11e6bc88566239544bd5841a89209994, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -427.4
+      value: -437.5
       objectReference: {fileID: 0}
     - target: {fileID: 4309696738052484, guid: 11e6bc88566239544bd5841a89209994, type: 2}
       propertyPath: m_LocalPosition.y
@@ -21293,6 +21293,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 47aa3cbb9e97291418bda07fa26687f6, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1448548536 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1414099058294236, guid: f09b146bf02880345a6fbddff4707e2c,
+    type: 2}
+  m_PrefabInternal: {fileID: 553452572}
 --- !u!1001 &1448648226
 Prefab:
   m_ObjectHideFlags: 0
@@ -28566,9 +28571,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2032219702}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e44cbe523e9eff14dac20a53619cdf79, type: 3}
+  m_Script: {fileID: 11500000, guid: 07ad03d8d88c51f40b68d3c35c4c34a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Continue: {fileID: 1579907986}
+  Exit: {fileID: 2048363933}
+  Win: {fileID: 1448548536}
+  Won: 0
 --- !u!23 &2032219704
 MeshRenderer:
   m_ObjectHideFlags: 0
