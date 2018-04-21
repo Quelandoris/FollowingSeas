@@ -7,7 +7,8 @@ public class ButtonScript : MonoBehaviour {
 
 	// Changes scenes as a public function
 	public void SceneChange (int buildOrder) {
-		SceneManager.LoadScene (buildOrder);
+        SceneManager.LoadScene(4);
+        SceneManager.LoadScene (buildOrder);
 	}
 	// Enables and disables objects as needed
 	public void ObjectToggle (GameObject target) {
